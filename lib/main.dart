@@ -6,7 +6,7 @@ void main(){
   Widget myApp = MaterialApp(
     initialRoute: "/login",
     routes: {
-      "/login" : (context) => const LoginView()
+      "/login" : (context) =>  LoginView()
     },
   );
   runApp(myApp);
