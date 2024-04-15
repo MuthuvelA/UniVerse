@@ -95,6 +95,8 @@ class _StaffDashboardViewState extends State<StaffDashboardView> {
     );
   }
   Widget quickRecap(double width,double height,List<String> studentNames){
+    List<String> title = ["Handling Student","Placed","Not Placed","As Intern"];
+    List<int> noStudent = [64,30,10,24];
     return GridView.count(
         crossAxisCount: 2,
       crossAxisSpacing: 10.0,
@@ -126,9 +128,9 @@ class _StaffDashboardViewState extends State<StaffDashboardView> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(padding: EdgeInsets.only(top: 30)),
-                Text("Placed",style: TextStyle(fontFamily: "Raleway",fontSize: 17,color: Colors.white),),
+                Text("${title[index]}",style: TextStyle(fontFamily: "Raleway",fontSize: 17,color: Colors.white),),
                 Padding(padding: EdgeInsets.only(top: 50)),
-                Text("No of Students : 30",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 15,color: Colors.white),)
+                Text("No of Students : ${noStudent[index]}",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 15,color: Colors.white),)
               ],
             ),
           ),
