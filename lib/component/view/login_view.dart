@@ -13,13 +13,16 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(left: 40,right: 40),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: MediaQuery.of(context).size.height/4.5),
+            Padding(padding: EdgeInsets.only(top: height/12),),
             const Row(
               children: [
                 Text(
@@ -29,12 +32,12 @@ class _LoginViewState extends State<LoginView> {
                 Icon(Icons.person_2_outlined)
               ],
             ),
-            const SizedBox(height: 5),
+            Padding(padding: EdgeInsets.only(top: height/40),),
             const Text(
               "Hello, welcome back to our account !",
               style: TextStyle(fontFamily: "Raleway-SemiBold", fontSize: 18, color: Colors.grey),
             ),
-            SizedBox(height: MediaQuery.of(context).size.height/12),
+            Padding(padding: EdgeInsets.only(top: height/12),),
             Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -48,7 +51,7 @@ class _LoginViewState extends State<LoginView> {
                 ),
               ),
             ),
-            const SizedBox(height: 10),
+            Padding(padding: EdgeInsets.only(top: height/12),),
             Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -62,7 +65,7 @@ class _LoginViewState extends State<LoginView> {
                 ),
               ),
             ),
-            SizedBox(height: MediaQuery.of(context).size.height/12),
+            Padding(padding: EdgeInsets.only(top: height/12),),
             Container(
               height: 50,
               decoration: BoxDecoration(
@@ -73,7 +76,7 @@ class _LoginViewState extends State<LoginView> {
                 minWidth: double.infinity,
                 child: Ink(
                   decoration: BoxDecoration(
-                    color: Color(0xFF031149),
+                    color: const Color(0xFF031149),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Container(
