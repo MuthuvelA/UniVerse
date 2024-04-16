@@ -78,6 +78,9 @@ flutter:
   assets:
     - assets/animation/animated_login_character.riv
     - assets/image/drawerLogo.png
+    - assets/image/leetcode.png
+    - assets/image/icons8-codechef-50.png
+    - assets/image/codeforces.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
