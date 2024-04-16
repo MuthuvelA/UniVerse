@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:universe/component/view/create_post_view.dart';
+import 'package:universe/component/view/generate_excel_view.dart';
 import 'package:universe/component/view/login_view.dart';
 import 'package:universe/component/view/student_details_view.dart';
 
@@ -73,9 +75,16 @@ class _StaffDashboardViewState extends State<StaffDashboardView> {
             leading: Icon(Icons.post_add_outlined),
             title: Text("Create post",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17),),
             onTap: () {
-
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const CreatePostView()));
             },
           ),
+          ListTile(
+            leading: Icon(Icons.document_scanner_outlined),
+            title: Text("Generate Excel Sheet",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17),),
+            onTap: () {
+              Navigator.push(context, (MaterialPageRoute(builder: (context) => const GenetateExcelView())));
+            },
+          )
         ],
       ),
     );

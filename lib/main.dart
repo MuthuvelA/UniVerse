@@ -6,7 +6,7 @@ import 'package:universe/component/view/student_profile.dart';
 
 void main(){
   Widget myApp = MaterialApp(
-    initialRoute : "/studentProfile",
+    initialRoute : "/login",
     routes: {
       "/login" : (context) =>  const LoginView(),
       "/staffDash" : (context) => const StaffDashboardView(),
