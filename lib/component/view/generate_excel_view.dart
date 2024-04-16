@@ -10,8 +10,6 @@ class GenetateExcelView extends StatefulWidget {
 
 class _GenetateExcelViewState extends State<GenetateExcelView> {
   List<String> studentDetails = [
-    "Name",
-    "Roll Number",
     "Email Address",
     "Phone Number",
     "Date of Birth",
@@ -19,16 +17,21 @@ class _GenetateExcelViewState extends State<GenetateExcelView> {
     "Parent Name",
     "Mother Name",
     "Blood Group",
-    "LeetCode ",
-    "CodeChef ",
-    "Codeforces ",
+    "LeetCode",
+    "CodeChef",
+    "Codeforces",
     "Aadhaar Card Number",
+    "Aadhaar Card Link",
     "PAN Card Number",
+    "PAN Card Link",
     "Driving License Number",
+    "Driving License Link",
     "Voter ID Number",
+    "Voter ID Link",
     "Passport Number",
+    "Passport Link",
     "Bank Account Number",
-    "Birth Certificate",
+    "Bank Account Link",
   ];
   late List<bool> checkboxDetails ;
 

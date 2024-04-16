@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:universe/component/view/student_personal_details_form_view.dart';
 
 class StudentDashboardView extends StatefulWidget {
   const StudentDashboardView({super.key});
@@ -59,7 +60,7 @@ class _StudentDashboardViewState extends State<StudentDashboardView> {
             leading: Icon(Icons.post_add_outlined),
             title: Text("Registration",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17),),
             onTap: () {
-
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const StudentDetailsFormView()));
             },
           ),
           ListTile(
@@ -129,7 +130,6 @@ class _StudentDashboardViewState extends State<StudentDashboardView> {
     DateTime now = new DateTime.now();
     DateTime date = new DateTime(now.year, now.month, now.day);
     return Container(
-      height: height/6,
       width: width,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
@@ -141,12 +141,13 @@ class _StudentDashboardViewState extends State<StudentDashboardView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(padding: EdgeInsets.only(top: height/60)),
+            Padding(padding: EdgeInsets.only(top: 20)),
             Text(" April 15, 2024",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 14,color: Colors.grey.shade400),),
             Padding(padding: EdgeInsets.only(top: height/20)),
             Text("Welcome Back, Gopinath!",style: TextStyle(fontFamily: "Raleway",fontSize: 18,color: Colors.white),),
-            Padding(padding: EdgeInsets.only(top: height/200)),
-            Text("Always Stay Updated :)",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 14,color: Colors.grey.shade400),)
+            Padding(padding: EdgeInsets.only(top: 3)),
+            Text("Always Stay Updated :)",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 14,color: Colors.grey.shade400),),
+            Padding(padding: EdgeInsets.only(top: 20))
           ],
         ),
       ),

@@ -1,25 +1,28 @@
 
 class ReportList{
   List<String> studentDetails = [
-    "Name",
-    "Roll Number",
-    "Email Address",
-    "Phone Number",
-    "Date of Birth",
-    "Address",
-    "Parent Name",
-    "Mother Name",
-    "Blood Group",
-    "LeetCode ",
-    "CodeChef ",
-    "Codeforces ",
-    "Aadhaar Card Number",
-    "PAN Card Number",
-    "Driving License Number",
-    "Voter ID Number",
-    "Passport Number",
-    "Bank Account Number",
-    "Birth Certificate",
+    "emailAddress",
+    "phoneNumber",
+    "dateOfBirth",
+    "address",
+    "parentName",
+    "motherName",
+    "bloodGroup",
+    "leetCode",
+    "codeChef",
+    "codeforces",
+    "aadhaarCardNumber",
+    "aadhaarCardLink",
+    "panCardNumber",
+    "panCardLink",
+    "drivingLicenseNumber",
+    "drivingLicenseLink",
+    "voterIdNumber",
+    "voterIdLink",
+    "passportNumber",
+    "passportLink",
+    "bankAccountNumber",
+    "bankAccountLink",
   ];
    List<String> personalList = [];
    List<String> coding = [];
@@ -29,7 +32,7 @@ class ReportList{
       if(studentDetails[i] == "Department") {
         continue;
       }
-      if(i>=9 && i<=11 && checkboxDetails[i] == true){
+      if(i>=7 && i<=9 && checkboxDetails[i] == true){
         coding.add(studentDetails[i]);
       }
       else if(checkboxDetails[i] == true){
