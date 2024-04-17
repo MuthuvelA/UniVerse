@@ -154,155 +154,167 @@ class _UserProfileState extends State<UserProfile> {
     return Column(
       children: [
         
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(width / 20),
-            color: Colors.white,
-          ),
-          width: width,
-          height: height / 4.5,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-
-             Container(
-              width: width/8,
-              height: width/8,
-              decoration: const BoxDecoration(
-                image:DecorationImage(
-                  image: AssetImage("assets/image/leetcode.png"),
-                  fit: BoxFit.fill,
-                  ),
-              ),
-             ),   
-
-              const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-
-                children: [
-                  Text("Easy"),
-                  Text("Medium"),
-                  Text("Hard"),
-                ],
-              ),
-
-              const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("10"),
-                  Text("10"),
-                  Text("10"),
-                ],
-              ),
-
-              SizedBox(
-                width: width/5,
-                height: width/5,
-                child: const CircularProgressIndicator(
-                  value: 1,
-                ),
-              ),
-            ],
-          ),
-        ),
+        leetcode(width, height),
 
         Padding(padding: EdgeInsets.only(top: width / 20)),
 
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(width / 20),
-            color: Colors.white,
-          ),
-          width: width,
-          height: height / 5,
-          child : Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-
-             Container(
-              width: width/8,
-              height: width/8,
-              decoration: const BoxDecoration(
-                image:DecorationImage(
-                  image: AssetImage("assets/image/icons8-codechef-50.png"),
-                  fit: BoxFit.fill,
-                  ),
-              ),
-             ),   
-
-              const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-
-                children: [
-                  Text("No of problems solved"),
-                  Text("Rating"),
-                  Text("Star"),
-                ],
-              ),
-
-              const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("10"),
-                  Text("10"),
-                  Text("3*"),
-                ],
-              ),
-            ],
-          ),
-        ),
+        codechef(width, height),
 
         Padding(padding: EdgeInsets.only(top: width / 20)),
 
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(width / 20),
-            color: Colors.white,
-          ),
-          width: width,
-          height: height / 5,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-
-             Container(
-              width: width/8,
-              height: width/8,
-              decoration: const BoxDecoration(
-                image:DecorationImage(
-                  image: AssetImage("assets/image/codeforces.png"),
-                  fit: BoxFit.fill,
-                  ),
-              ),
-             ),   
-
-              const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-
-                children: [
-                  Text("No of problems solved"),
-                  Text("Rating"),
-                  Text("Position"),
-                ],
-              ),
-
-              const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("10"),
-                  Text("10"),
-                  Text("Newbie"),
-                ],
-              ),
-            ],
-          ),
-        ),
+        codeforce(width, height),
 
         Padding(padding: EdgeInsets.only(top: width / 20)),
       ],
     );
+  }
+
+  Widget codeforce(double width, double height) {
+    return Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(width / 20),
+          color: Colors.white,
+        ),
+        width: width,
+        height: height / 5,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+
+           Container(
+            width: width/8,
+            height: width/8,
+            decoration: const BoxDecoration(
+              image:DecorationImage(
+                image: AssetImage("assets/image/codeforces.png"),
+                fit: BoxFit.fill,
+                ),
+            ),
+           ),   
+
+            const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+
+              children: [
+                Text("No of problems solved"),
+                Text("Rating"),
+                Text("Position"),
+              ],
+            ),
+
+            const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("10"),
+                Text("10"),
+                Text("Newbie"),
+              ],
+            ),
+          ],
+        ),
+      );
+  }
+
+  Widget codechef(double width, double height) {
+    return Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(width / 20),
+          color: Colors.white,
+        ),
+        width: width,
+        height: height / 5,
+        child : Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+
+           Container(
+            width: width/8,
+            height: width/8,
+            decoration: const BoxDecoration(
+              image:DecorationImage(
+                image: AssetImage("assets/image/icons8-codechef-50.png"),
+                fit: BoxFit.fill,
+                ),
+            ),
+           ),   
+
+            const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+
+              children: [
+                Text("No of problems solved"),
+                Text("Rating"),
+                Text("Star"),
+              ],
+            ),
+
+            const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("10"),
+                Text("10"),
+                Text("3*"),
+              ],
+            ),
+          ],
+        ),
+      );
+  }
+
+  Widget leetcode(double width, double height) {
+    return Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(width / 20),
+          color: Colors.white,
+        ),
+        width: width,
+        height: height / 4.5,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+
+           Container(
+            width: width/8,
+            height: width/8,
+            decoration: const BoxDecoration(
+              image:DecorationImage(
+                image: AssetImage("assets/image/leetcode.png"),
+                fit: BoxFit.fill,
+                ),
+            ),
+           ),   
+
+            const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+
+              children: [
+                Text("Easy"),
+                Text("Medium"),
+                Text("Hard"),
+              ],
+            ),
+
+            const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("10"),
+                Text("10"),
+                Text("10"),
+              ],
+            ),
+
+            SizedBox(
+              width: width/5,
+              height: width/5,
+              child: const CircularProgressIndicator(
+                value: 1,
+              ),
+            ),
+          ],
+        ),
+      );
   }
 }
