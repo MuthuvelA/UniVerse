@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:universe/component/view/create_post_view.dart';
 import 'package:universe/component/view/generate_excel_view.dart';
 import 'package:universe/component/view/login_view.dart';
+import 'package:universe/component/view/staff_profile_view.dart';
 import 'package:universe/component/view/student_details_view.dart';
 import 'package:universe/service/excel_download.dart';
 
@@ -62,7 +63,7 @@ class _StaffDashboardViewState extends State<StaffDashboardView> {
             leading: Icon(Icons.person_2_outlined),
             title: Text("My profile",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17),),
             onTap: () {
-
+              Navigator.push(context, (MaterialPageRoute(builder: (context) => const StaffProfileView())));
             },
           ),
           ListTile(
