@@ -33,122 +33,96 @@ class _UserProfileState extends State<UserProfile> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 198, 208, 244),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(width / 20),
-          child: Column(
-            children: [
-              Container(
-                width: width,
-                height: height / 5,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(width / 20)),
-                child: Column(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Text(
-                        "Prakash kumar",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: "Raleway",
-                          fontSize: width / 10,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Text(
-                        "CCE",
-                        style: TextStyle(
-                          fontFamily: "Raleway-SemiBold",
-                          fontSize: width / 15,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Text(
-                        "II year",
-                        style: TextStyle(fontSize: width / 20),
-                      ),
-                    )
-                  ],
-                ),
+        child: Column(
+          children: [
+            Padding(padding: EdgeInsets.only(top: 50)),
+            Center(
+              child: Text(
+                "Prakash kumar",
+                style: TextStyle(fontFamily: "Raleway",fontSize: 36),
               ),
-              Padding(padding: EdgeInsets.only(top: width / 20)),
-
-              Padding(
-                padding: EdgeInsets.all(width/20),
-                child: ToggleButtons(
-                  fillColor : Colors.white,
-                  renderBorder: false,
-                  // direction: Axis.horizontal,
-                  onPressed: (int index) {
-                    setState(() {
-                      for (int i = 0; i < _selectedButtons.length; i++) {
-                        _selectedButtons[i] = (i == index);
-                      }
-                      decider = (index == 0);
-                    });
-                  },
-                  borderRadius: BorderRadius.circular(width / 20),
-                  // fillColor: Colors.blue[200],
-                  constraints: BoxConstraints(
-                    minHeight: width / 10,
-                    minWidth: width / 20,
-                  ),
-                  isSelected: _selectedButtons,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: _selectedButtons[0]
-                              ? Colors.blue[400]
-                              : Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        padding: const EdgeInsets.all(5),
-                        width: width/3,
-                        height: height/10,
-                        alignment: Alignment.center,
-                        child: const Text(
-                          "Performance",
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: _selectedButtons[1]
-                              ? Colors.blue[400]
-                              : Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        padding: const EdgeInsets.all(5),
-                        width: width/3,
-                        height: height/10,
-                        alignment: Alignment.center,
-                        child: const Text(
-                          "Personal details",
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+            ),
+            Padding(padding: EdgeInsets.only(top: 3)),
+            Center(
+              child: Text(
+                "CCE",
+                style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 26),
               ),
-              Padding(padding: EdgeInsets.only(top: width / 20)),
+            ),
+            Padding(padding: EdgeInsets.only(top: 15)),
+            Center(
+              child: Text(
+                "|| Year",
+                style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 16),
+              ),
+            ),
+            Padding(padding: EdgeInsets.only(top: 50)),
 
-              if (decider)
-                Performance(width, height)
-              else
-                groups(),
-
-            ],
+        ToggleButtons(
+          fillColor : Colors.white,
+          renderBorder: false,
+          // direction: Axis.horizontal,
+          onPressed: (int index) {
+            setState(() {
+              for (int i = 0; i < _selectedButtons.length; i++) {
+                _selectedButtons[i] = (i == index);
+              }
+              decider = (index == 0);
+            });
+          },
+          borderRadius: BorderRadius.circular(10),
+          // fillColor: Colors.blue[200],
+          constraints: BoxConstraints(
+            minHeight: 50,
+            minWidth: 50,
           ),
+          isSelected: _selectedButtons,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: _selectedButtons[0]
+                      ? Colors.blue[400]
+                      : Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                padding: const EdgeInsets.all(5),
+                alignment: Alignment.center,
+                child: const Text(
+                  "Performance",
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: _selectedButtons[1]
+                      ? Colors.blue[400]
+                      : Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                padding: const EdgeInsets.all(5),
+                alignment: Alignment.center,
+                child: const Text(
+                  "Personal details",
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+            ),
+            // else
+            //   personalDetails()
+          ],
+        ),
+
+            if (decider)
+              Performance(width, height)
+            else
+              groups(),
+
+          ],
         ),
       ),
     );
@@ -318,98 +292,101 @@ class _UserProfileState extends State<UserProfile> {
     );
   }
   Widget groups(){
-    return Column(
-      children: [
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              personalDecider = !personalDecider;
-              governDecider = false;
-              bankDecider = false;
-              referenceDecider = false;
-            });
-          },
-          child: Container(
-            height: 30,
-            decoration: BoxDecoration(
-              // shape: BoxShape.circle,
-                borderRadius: BorderRadius.circular(100),
-                border: Border.all(color: Colors.black,width: 1),
-                color: personalDecider ? Colors.blue : Colors.white
+    return Padding(
+      padding: const EdgeInsets.only(left: 15,right: 15,top: 20),
+      child: Column(
+        children: [
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                personalDecider = !personalDecider;
+                governDecider = false;
+                bankDecider = false;
+                referenceDecider = false;
+              });
+            },
+            child: Container(
+              height: 30,
+              decoration: BoxDecoration(
+                // shape: BoxShape.circle,
+                  borderRadius: BorderRadius.circular(100),
+                  border: Border.all(color: Colors.black,width: 1),
+                  color: personalDecider ? Colors.blue : Colors.white
+              ),
+              child: Center(child: Text("Personal Information")),
             ),
-            child: Center(child: Text("Personal Information")),
           ),
-        ),
-        if(personalDecider)
-          personalInformationView(),
-        Padding(padding: EdgeInsets.only(top: 20)),
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              personalDecider = false;
-              governDecider = !governDecider;
-              bankDecider = false;
-              referenceDecider = false;
-            });
-          },
-          child: Container(
-            height: 30,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.black,width: 1),
-                color: governDecider ? Colors.blue : Colors.white
+          if(personalDecider)
+            personalInformationView(),
+          Padding(padding: EdgeInsets.only(top: 20)),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                personalDecider = false;
+                governDecider = !governDecider;
+                bankDecider = false;
+                referenceDecider = false;
+              });
+            },
+            child: Container(
+              height: 30,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Colors.black,width: 1),
+                  color: governDecider ? Colors.blue : Colors.white
+              ),
+              child: Center(child: Text("Government ID's")),
             ),
-            child: Center(child: Text("Government ID's")),
           ),
-        ),
-        if(governDecider)
-          governmentDocumentView(),
-        Padding(padding: EdgeInsets.only(top: 20)),
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              personalDecider = false;
-              governDecider = false;
-              bankDecider = !bankDecider;
-              referenceDecider = false;
-            });
-          },
-          child: Container(
-            height: 30,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.black,width: 1),
-                color: bankDecider ? Colors.blue : Colors.white
+          if(governDecider)
+            governmentDocumentView(),
+          Padding(padding: EdgeInsets.only(top: 20)),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                personalDecider = false;
+                governDecider = false;
+                bankDecider = !bankDecider;
+                referenceDecider = false;
+              });
+            },
+            child: Container(
+              height: 30,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Colors.black,width: 1),
+                  color: bankDecider ? Colors.blue : Colors.white
+              ),
+              child: Center(child: Text("Bank Details")),
             ),
-            child: Center(child: Text("Bank Details")),
           ),
-        ),
-        if(bankDecider)
-          bankDetailsView(),
-        Padding(padding: EdgeInsets.only(top: 20)),
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              personalDecider = false;
-              governDecider = false;
-              bankDecider = false;
-              referenceDecider = !referenceDecider;
-            });
-          },
-          child: Container(
-            height: 30,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.black,width: 1),
-                color: referenceDecider ? Colors.blue : Colors.white
+          if(bankDecider)
+            bankDetailsView(),
+          Padding(padding: EdgeInsets.only(top: 20)),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                personalDecider = false;
+                governDecider = false;
+                bankDecider = false;
+                referenceDecider = !referenceDecider;
+              });
+            },
+            child: Container(
+              height: 30,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Colors.black,width: 1),
+                  color: referenceDecider ? Colors.blue : Colors.white
+              ),
+              child: Center(child: Text("Reference Link")),
             ),
-            child: Center(child: Text("Reference Link")),
           ),
-        ),
-        Padding(padding: EdgeInsets.only(top: 15)),
-        if(referenceDecider)
-          referenceView()
-      ],
+          Padding(padding: EdgeInsets.only(top: 15)),
+          if(referenceDecider)
+            referenceView()
+        ],
+      ),
     );
   }
   Column Performance(double width, double height) {
