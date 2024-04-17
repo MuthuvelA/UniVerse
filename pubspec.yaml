@@ -43,7 +43,8 @@ dependencies:
   open_file: ^3.3.2
   encrypt: ^5.0.3
   flutter_dotenv: ^5.0.2
-
+  flutter_downloader: ^1.11.7
+  file_picker: ^8.0.0+1
 
 dev_dependencies:
   flutter_test:
