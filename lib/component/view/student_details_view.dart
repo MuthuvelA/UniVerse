@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:universe/component/view/student_profile.dart';
 
 class StudentDetailsView extends StatefulWidget {
   StudentDetailsView({super.key,required this.studentDetails});
@@ -31,30 +33,33 @@ class _StudentDetailsViewState extends State<StudentDetailsView> {
         return Column(
           children: [
             Padding(padding: EdgeInsets.only(top: 20)),
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.black,width: 1),
-                  color: Color(0xFF27397A)
-              ),
-              child: Padding(
-                padding: EdgeInsets.only(left: 10,right: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(padding: EdgeInsets.only(top: 20)),
-                    Row(
-                      children: [
-                        Icon(Icons.person_2_outlined),
-                        Padding(padding: EdgeInsets.only(left: 5)),
-                        GestureDetector(
-                          child: Text("${widget.studentDetails[index]}",style: TextStyle(color: Colors.white,fontFamily: "Raleway-SemiBold",fontSize: 17),),
-                        ),
-                      ],
-                    ),
-                    Padding(padding: EdgeInsets.only(bottom: 20)),
-                  ],
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, (MaterialPageRoute(builder: (context) => const UserProfile())));
+              },
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Colors.black,width: 1),
+                    color: Color(0xFF27397A)
+                ),
+                child: Padding(
+                  padding: EdgeInsets.only(left: 10,right: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(padding: EdgeInsets.only(top: 20)),
+                      Row(
+                        children: [
+                          Icon(Icons.person_2_outlined),
+                          Padding(padding: EdgeInsets.only(left: 5)),
+                          Text("${widget.studentDetails[index]}",style: TextStyle(color: Colors.white,fontFamily: "Raleway-SemiBold",fontSize: 17),),
+                        ],
+                      ),
+                      Padding(padding: EdgeInsets.only(bottom: 20)),
+                    ],
+                  ),
                 ),
               ),
             ),
