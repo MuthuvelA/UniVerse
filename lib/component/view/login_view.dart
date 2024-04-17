@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:universe/component/utils/credentials.dart';
-
-enum SingingCharacter { student, teacher, admin }
+import 'package:universe/services/encryption.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -11,8 +10,9 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  SingingCharacter? _character = SingingCharacter.student;
-  
+  String? _selectedCharacter;
+  final List<String> _characterOptions = ['Student', 'Teacher', 'Admin'];
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -96,46 +96,25 @@ class _LoginViewState extends State<LoginView> {
                       Padding(padding: EdgeInsets.only(top: width / 10)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Radio<SingingCharacter>(
-                            value: SingingCharacter.student,
-                            groupValue: _character,
-                            onChanged: (SingingCharacter? value) {
-                              setState(() {
-                                _character = value;
-                              });
-                            },
-                          ),
-                          Text(
-                            'Student',
-                            style: TextStyle(fontSize: width / 20),
-                          ),
-                          Radio<SingingCharacter>(
-                            value: SingingCharacter.teacher,
-                            groupValue: _character,
-                            onChanged: (SingingCharacter? value) {
-                              setState(() {
-                                _character = value;
-                              });
-                            },
-                          ),
-                          Text(
-                            'teacher',
-                            style: TextStyle(fontSize: width / 20),
-                          ),                          Radio<SingingCharacter>(
-                            value: SingingCharacter.admin,
-                            groupValue: _character,
-                            onChanged: (SingingCharacter? value) {
-                              setState(() {
-                                _character = value;
-                              });
-                            },
-                          ),
-                          Text(
-                            'admin',
-                            style: TextStyle(fontSize: width / 20),
-                          ), 
-                        ],
+                        children: _characterOptions
+                            .map((option) => Row(
+                                  children: [
+                                    Radio<String>(
+                                      value: option,
+                                      groupValue: _selectedCharacter,
+                                      onChanged: (String? value) {
+                                        setState(() {
+                                          _selectedCharacter = value;
+                                        });
+                                      },
+                                    ),
+                                    Text(
+                                      option,
+                                      style: TextStyle(fontSize: width / 20),
+                                    ),
+                                  ],
+                                ))
+                            .toList(),
                       ),
                       Padding(padding: EdgeInsets.only(top: width / 20)),
                       SizedBox(
@@ -143,8 +122,12 @@ class _LoginViewState extends State<LoginView> {
                         child: ElevatedButton(
                           onPressed: () {
                             setState(() {
-                             userCredentials.set_pass(password.value);
-                             userCredentials.set_user(username.value);
+                              userCredentials.set_pass(password.text.toString());
+                              userCredentials.set_user(username.text.toString());
+                              userCredentials.set_user_type(_selectedCharacter ?? '');
+                              encryptData(userCredentials.get_user());
+                              encryptData(userCredentials.get_pass());
+                              encryptData(userCredentials.get_user_type());
                             });
                           },
                           style: ElevatedButton.styleFrom(
