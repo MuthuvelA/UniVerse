@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:universe/component/view/login_view.dart';
 import 'package:universe/component/view/staff_dashboard_view.dart';
+import 'package:universe/component/view/staff_profile_view.dart';
 import 'package:universe/component/view/student_dashboard_view.dart';
 import 'package:universe/component/view/student_profile.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+
 Future<void> main() async {
-  await dotenv.load(fileName: "assets/.env");
+  await dotenv.load(fileName: "/.env");
   runApp(const MyApp());
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -16,12 +19,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: "/login",
+      initialRoute: "/staffDash",
       routes: {
-        "/login": (context) => const LoginView(),
-        "/staffDash": (context) => const StaffDashboardView(),
-        "/studentDash": (context) => const StudentDashboardView(),
-        "/studentProfile": (context) => const UserProfile(),
+        "/login" : (context) =>  const LoginView(),
+        "/staffDash" : (context) => const StaffDashboardView(),
+        "/studentDash" : (context) => const StudentDashboardView(),
+        "/studentProfile" : (context) => const UserProfile(),
+        "/staffProfile" : (context) => const StaffProfileView()
       },
     );
   }

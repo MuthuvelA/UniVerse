@@ -128,7 +128,7 @@ class _StudentDetailsFormViewState extends State<StudentDetailsFormView> {
                 Navigator.push(context, MaterialPageRoute(builder: (context) =>  StudentCodingDetailsForm(personalDetailsController: personalDetailsControllers,)));
               },
               child: Text("Next",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 16,color: Colors.white),),
-              color: Colors.blue,
+              color: Color(0xFF27397A),
             ),
           ),
           Padding(padding: EdgeInsets.only(top: 15)),

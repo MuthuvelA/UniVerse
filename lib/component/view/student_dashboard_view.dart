@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:universe/component/view/student_personal_details_form_view.dart';
+import 'package:universe/component/view/student_profile.dart';
 
 class StudentDashboardView extends StatefulWidget {
   const StudentDashboardView({super.key});
@@ -46,7 +47,7 @@ class _StudentDashboardViewState extends State<StudentDashboardView> {
             leading: Icon(Icons.person_2_outlined),
             title: Text("My profile",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17),),
             onTap: () {
-
+              Navigator.push(context, (MaterialPageRoute(builder: (context) => const UserProfile())));
             },
           ),
           ListTile(

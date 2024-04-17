@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:universe/component/utils/credentials.dart';
-import 'package:universe/services/encryption.dart';
+import 'package:universe/service/encryption.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);

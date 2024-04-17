@@ -38,9 +38,13 @@ dependencies:
   cupertino_icons: ^1.0.6
   rive: ^0.13.1
   flutter_quill: ^9.3.7
+  path_provider: ^2.1.3
+  excel: ^4.0.3
+  open_file: ^3.3.2
   encrypt: ^5.0.3
   flutter_dotenv: ^5.0.2
-
+  flutter_downloader: ^1.11.7
+  file_picker: ^8.0.0+1
 
 dev_dependencies:
   flutter_test:
@@ -62,9 +66,9 @@ flutter:
     - family: Raleway
       fonts:
         - asset: assets/font/Raleway-Black.ttf
-#    - family: Raleway-Bold
-#      fonts:
-#        - asset: assets/font/Raleway-Bold.ttf
+    #    - family: Raleway-Bold
+    #      fonts:
+    #        - asset: assets/font/Raleway-Bold.ttf
     - family: Raleway-SemiBold
       fonts:
         - asset: assets/font/Raleway-SemiBold.ttf
@@ -84,7 +88,6 @@ flutter:
     - assets/image/leetcode.png
     - assets/image/icons8-codechef-50.png
     - assets/image/codeforces.png
-    - assets/.env
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
