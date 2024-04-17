@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:universe/component/utils/excel_download.dart';
 import 'package:universe/component/view/create_post_view.dart';
 import 'package:universe/component/view/generate_excel_view.dart';
 import 'package:universe/component/view/login_view.dart';
 import 'package:universe/component/view/student_details_view.dart';
+import 'package:universe/service/excel_download.dart';
 
 class StaffDashboardView extends StatefulWidget {
   const StaffDashboardView({super.key});

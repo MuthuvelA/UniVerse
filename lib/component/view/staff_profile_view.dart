@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class StaffProfileView extends StatefulWidget {
   const StaffProfileView({super.key});
@@ -9,18 +11,23 @@ class StaffProfileView extends StatefulWidget {
 
 class _StaffProfileViewState extends State<StaffProfileView> {
   late List<bool> _selectedButtons;
+  late List<bool> _performanceBool;
   bool decider = true;
+  bool fdp = false;
   @override
   void initState(){
     super.initState();
     _selectedButtons = List<bool>.filled(2, false);
+    _performanceBool = List<bool>.filled(3, false);
     _selectedButtons[0] = true;
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 198, 208, 244),
-      body: bodyPartForProfile(),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+          child: bodyPartForProfile()),
     );
   }
   Widget bodyPartForProfile(){
@@ -49,6 +56,10 @@ class _StaffProfileViewState extends State<StaffProfileView> {
         ),
         Padding(padding: EdgeInsets.only(top: 50)),
         toggleButton(),
+        if(decider)
+          performance()
+        else
+          personalDetails()
       ],
     );
   }
@@ -107,6 +118,155 @@ class _StaffProfileViewState extends State<StaffProfileView> {
             ),
           ),
         ),
+        // else
+        //   personalDetails()
+      ],
+    );
+  }
+
+  Widget performance(){
+    List<String> performanceInfo = [
+      "Faculty Development program",
+      "Paper Published",
+      "Patent Registered"
+    ];
+    List<String> fdp = [
+      "Data Scientist",
+      "Data Mining",
+      "Cloud Architect"
+    ];
+    List<String> paper = [
+      "paper 1",
+      "paper 2",
+      "paper 3"
+    ];
+    List<String> patent = [
+      "patent 1",
+      "patent 2",
+      "patent 3"
+    ];
+    return Column(
+      children: [
+        Column(
+            children: List.generate(performanceInfo.length, (index) {
+              return Padding(
+                padding: const EdgeInsets.only(left: 15,right: 15),
+                child: Column(
+                  children: [
+                    Padding(padding: EdgeInsets.only(top: 10)),
+                    GestureDetector(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: Colors.black,width: 1),
+                            color: _performanceBool[index] ? Colors.blue : Colors.white
+                        ),
+                        child: Column(
+                          children: [
+                            Padding(padding: EdgeInsets.only(top: 15)),
+                            Center(
+                              child: Text(performanceInfo[index],style: TextStyle(fontFamily: "Raleway",fontSize: 18),),
+                            ),
+                            Padding(padding: EdgeInsets.only(top: 15)),
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        setState(() {
+                          _performanceBool[index] = true;
+                          for(int i=0;i<performanceInfo.length;i++){
+                            if(i != index){
+                              _performanceBool[i] = false;
+                            }
+                          }
+                        });
+                      },
+                    ),
+                    if(_performanceBool[index] == true && index == 0)
+                      fdpView(fdp),
+                    if(_performanceBool[index] == true && index == 1)
+                      fdpView(paper),
+                    if(_performanceBool[index] == true && index == 2)
+                      fdpView(patent),
+                    Padding(padding: EdgeInsets.only(top: 10)),
+                  ],
+                ),
+              );
+            })
+        )
+      ],
+    );
+  }
+  Widget fdpView(List<String> fdp){
+    return Padding(
+      padding: const EdgeInsets.only(left: 15,right: 15),
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.black,width: 1),
+          color: Colors.white
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(padding: EdgeInsets.only(top: 15)),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: List.generate(fdp.length, (index) {
+                  return Text(fdp[index],style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17),);
+                }),
+              ),
+              Padding(padding: EdgeInsets.only(top: 15)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget personalDetails(){
+    List<String> personalOut = [
+      "M.E, Ph.D.",
+      "Teaching : 8 Years\n Industry : 1 Years",
+      "Data mining, Machine Learning"
+    ];
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 30,left: 15,right: 15),
+          child: Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.black,width: 1),
+              color: Colors.white
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(padding: EdgeInsets.only(top: 15)),
+                  Icon(Icons.school_outlined),
+                  Text("Educational Qualification",style: TextStyle(fontFamily: "Raleway",fontSize: 17),),
+                  Text(personalOut[0],style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 15),),
+                  Padding(padding: EdgeInsets.only(top: 15)),
+                  Icon(Icons.work),
+                  Text("Work Experience",style: TextStyle(fontFamily: "Raleway",fontSize: 17),),
+                  Text(personalOut[1],style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 15),),
+                  Padding(padding: EdgeInsets.only(top: 15)),
+                  Icon(Icons.star),
+                  Text("Area of specialization",style: TextStyle(fontFamily: "Raleway",fontSize: 17),),
+                  Text(personalOut[2],style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 15),),
+                  Padding(padding: EdgeInsets.only(top: 15)),
+                ],
+              ),
+            ),
+          ),
+        )
       ],
     );
   }
