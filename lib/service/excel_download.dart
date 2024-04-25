@@ -8,10 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:open_file/open_file.dart';
 import 'package:excel/excel.dart' as excel;
-import 'package:path_provider/path_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'package:path/path.dart' as path;
+import 'package:flutter/material.dart';
 
 // class ExcelDownload extends StatelessWidget{
 //   Future<void> createExcel(String base64String) async {
@@ -73,4 +70,28 @@ class ExcelDownload {
     Url.revokeObjectUrl(url);
   }
 
+}
+
+  Future<String> _getDownloadDirectory() async {
+    Directory? downloadsDir;
+    if (Platform.isAndroid) {
+      downloadsDir = await getExternalStorageDirectory();
+    } else if (Platform.isIOS) {
+      downloadsDir = await getApplicationDocumentsDirectory();
+    }
+
+    if (downloadsDir == null) {
+      throw FileSystemException('Downloads directory not found.');
+    }
+
+    return downloadsDir.path;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: convertFile,
+      child: const Text('Convert File'),
+    );
+  }
 }
