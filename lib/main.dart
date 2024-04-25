@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: "/studentProfile",
+      initialRoute: "/staffDash",
       routes: {
         "/login" : (context) =>  const LoginView(),
         "/staffDash" : (context) => const StaffDashboardView(),

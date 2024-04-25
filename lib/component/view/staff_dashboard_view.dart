@@ -1,17 +1,11 @@
 import 'dart:convert';
-import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:excel/excel.dart'as excel;
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import 'package:universe/component/view/create_post_view.dart';
 import 'package:universe/component/view/generate_excel_view.dart';
 import 'package:universe/component/view/staff_profile_view.dart';
 import 'package:universe/component/view/student_details_view.dart';
-import 'package:universe/service/excel_download.dart';
 import 'package:universe/service/excel_download.dart';
 
 class StaffDashboardView extends StatefulWidget {
@@ -86,7 +80,7 @@ class _StaffDashboardViewState extends State<StaffDashboardView> {
 
               // Convert the list of bytes to a Uint8List
               Uint8List byteList = Uint8List.fromList(bytes);
-              excelDownload.saveExcel("sample", byteList);
+              saveExcel("sample", byteList);
               print("success");
            },
           ),
