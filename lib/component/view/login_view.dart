@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:universe/component/utils/credentials.dart';
-import 'package:universe/service/encryption.dart';
+import 'package:universe/component/view/staff_dashboard_view.dart';
+import 'package:universe/component/view/student_dashboard_view.dart';
+import 'package:universe/service/loginService.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -120,15 +122,22 @@ class _LoginViewState extends State<LoginView> {
                       SizedBox(
                         width: width - 2 * width / 20,
                         child: ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             setState(() {
                               userCredentials.set_pass(password.text.toString());
                               userCredentials.set_user(username.text.toString());
                               userCredentials.set_user_type(_selectedCharacter ?? '');
-                              encryptData(userCredentials.get_user());
-                              encryptData(userCredentials.get_pass());
-                              encryptData(userCredentials.get_user_type());
+                              // encryptData(userCredentials.get_user());
+                              // encryptData(userCredentials.get_pass());
+                              // encryptData(userCredentials.get_user_type());
                             });
+                            Map<dynamic,dynamic> mp = await validateLogin();
+                            if(mp['status']){
+                                if(userCredentials.get_user_type() == 'student') Navigator.push(context, MaterialPageRoute(builder: (context) => StudentDashboardView(post:mp['post'])));
+                                if(userCredentials.get_user_type() == 'Teacher') Navigator.push(context, MaterialPageRoute(builder: (context) => const StaffDashboardView()));
+                            }
+                            // if(await validateLogin()){
+                            // }
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quill/flutter_quill.dart';
 
 class CreatePostView extends StatefulWidget {
   const CreatePostView({super.key});
@@ -22,7 +21,7 @@ class _CreatePostViewState extends State<CreatePostView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Create Post",style: TextStyle(fontFamily: "Raleway",fontSize: 18),),
+        title: const Text("Create Post",style: TextStyle(fontFamily: "Raleway",fontSize: 18),),
         centerTitle: true,
       ),
       body: bodyPartForPost(),
@@ -30,11 +29,29 @@ class _CreatePostViewState extends State<CreatePostView> {
   }
   Widget bodyPartForPost(){
     TextEditingController createPostController = TextEditingController();
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 10,right: 10,top: 50),
-          child: Container(
+    TextEditingController tittleController = TextEditingController();
+    return Padding(
+      padding: const EdgeInsets.only(left: 15,right: 15),
+      child: Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.black)
+            ),
+            child: TextFormField(
+              decoration: InputDecoration(
+                hintText: "Enter the title...",
+                hintStyle: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 16,color: Colors.grey),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                )
+              ),
+               controller: tittleController,
+            ),
+          ),
+          Padding(padding: EdgeInsets.only(top: 10)),
+          Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: Border.all(color: Colors.black)
@@ -51,15 +68,15 @@ class _CreatePostViewState extends State<CreatePostView> {
               controller: createPostController,
             ),
           ),
-        ),
-        Padding(padding: EdgeInsets.only(top: 15)),
-        MaterialButton(onPressed: (){
-
-        },
-          child: Text("Publish",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17,color: Colors.white),),
-          color: Colors.blue,
-        )
-      ],
+          Padding(padding: EdgeInsets.only(top: 15)),
+          MaterialButton(onPressed: (){
+      
+          },
+            child: Text("Publish",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17,color: Colors.white),),
+            color: Colors.blue,
+          )
+        ],
+      ),
     );
   }
 }

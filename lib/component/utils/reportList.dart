@@ -5,11 +5,11 @@ class ReportList{
     "phoneNumber",
     "dateOfBirth",
     "address",
-    "parentName",
+    "fatherName",
     "motherName",
     "bloodGroup",
-    "leetCode",
-    "codeChef",
+    "leetcode",
+    "codechef",
     "codeforces",
     "aadhaarCardNumber",
     "aadhaarCardLink",
@@ -24,9 +24,11 @@ class ReportList{
     "bankAccountNumber",
     "bankAccountLink",
   ];
-   List<String> personalList = [];
-   List<String> coding = [];
+
+   static List<String> personalList = [];
+   static List<String> coding = [];
    Map<String,dynamic> finalJson ={};
+
   void list(List<bool> checkboxDetails){
     for(int i=0;i<checkboxDetails.length;i++){
       if(studentDetails[i] == "Department") {
@@ -39,14 +41,9 @@ class ReportList{
         personalList.add(studentDetails[i]);
       }
     }
-    finalJson = {
-      "department":'CCE',
-    "year":2,
+    finalJson = {    
     "personal": personalList,
     "coding": coding
-
-
-
 
   };
     print(finalJson);

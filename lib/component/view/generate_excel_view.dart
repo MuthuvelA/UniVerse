@@ -1,5 +1,10 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:universe/component/utils/reportList.dart';
+import 'package:universe/service/excel_download.dart';
+import 'package:universe/service/excel_download_service.dart';
 
 class GenetateExcelView extends StatefulWidget {
   const GenetateExcelView({super.key});
@@ -44,7 +49,7 @@ class _GenetateExcelViewState extends State<GenetateExcelView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Generate Report",style: TextStyle(fontFamily: "Raleway",fontSize: 18),),
+        title: const Text("Generate Report",style: TextStyle(fontFamily: "Raleway",fontSize: 18),),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -92,8 +97,15 @@ class _GenetateExcelViewState extends State<GenetateExcelView> {
           Padding(padding: EdgeInsets.only(top: 30)),
           Center(
             child: MaterialButton(
-              onPressed: () {
+              onPressed: () async{
                 reportList.list(checkboxValues);
+                  dynamic value = await generate();
+                  String data = value['message'];
+                  print(data);
+                  List<int> bytes = base64Decode(data);
+                  Uint8List byteList = Uint8List.fromList(bytes);
+                  saveExcel("sample", byteList);
+                  print("success");
               },
               child: Text("Submit",style: TextStyle(fontSize: 16,fontFamily: "Raleway-SemiBold",color: Colors.white),),
               color: Color(0xFF27397A),
