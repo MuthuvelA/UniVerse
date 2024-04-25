@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:universe/component/utils/credentials.dart';
+import 'package:universe/component/view/student_dashboard_view.dart';
 import 'package:universe/service/encryption.dart';
+import 'package:universe/service/loginService.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -121,13 +123,18 @@ class _LoginViewState extends State<LoginView> {
                         width: width - 2 * width / 20,
                         child: ElevatedButton(
                           onPressed: () {
-                            setState(() {
+                            setState(() async {
                               userCredentials.set_pass(password.text.toString());
                               userCredentials.set_user(username.text.toString());
                               userCredentials.set_user_type(_selectedCharacter ?? '');
                               encryptData(userCredentials.get_user());
                               encryptData(userCredentials.get_pass());
                               encryptData(userCredentials.get_user_type());
+                              if(await validateLogin(username.text,password.text)){
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => const StudentDashboardView()));
+                              }else{
+                                print("LOGIN FAILURE");
+                              }
                             });
                           },
                           style: ElevatedButton.styleFrom(

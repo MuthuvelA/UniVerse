@@ -8,6 +8,7 @@ class userCredentials{
   static dynamic _pass;
   static dynamic _user_type;
   static final dynamic _key = dotenv.env['key'];
+  static final IP="http://172.17.9.103:3002";
   
   static void set_user(dynamic newuser){ 
     _user = newuser;

@@ -12,7 +12,7 @@ Future<bool> validateLogin(String username, String password) async {
   print(reqBody);
 
   var response = await http.post(
-    Uri.parse(userCredentials.IP+"login"),
+    Uri.parse(userCredentials.IP+"/login"),
     headers: {"content-Type": "application/json"},
     body: jsonEncode(reqBody),
   );
