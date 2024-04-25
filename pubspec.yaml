@@ -45,7 +45,10 @@ dependencies:
   flutter_dotenv: ^5.0.2
   flutter_downloader: ^1.11.7
   file_picker: ^8.0.0+1
-
+  shared_preferences: ^2.2.3
+  flutter_file_downloader: ^1.2.1
+  http: ^1.2.1
+  path: ^1.9.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
