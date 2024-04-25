@@ -24,7 +24,11 @@ class _StaffProfileViewState extends State<StaffProfileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 198, 208, 244),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text("PROFILE",style: TextStyle(fontFamily: "Raleway",color: Colors.white,fontSize: 17),),
+        backgroundColor: Color(0xFF27397A),
+      ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
           child: bodyPartForProfile()),
@@ -33,27 +37,7 @@ class _StaffProfileViewState extends State<StaffProfileView> {
   Widget bodyPartForProfile(){
     return Column(
       children: [
-        Padding(padding: EdgeInsets.only(top: 50)),
-        Center(
-          child: Text(
-            "Prakash kumar",
-            style: TextStyle(fontFamily: "Raleway",fontSize: 36),
-          ),
-        ),
-        Padding(padding: EdgeInsets.only(top: 3)),
-        Center(
-          child: Text(
-            "CCE",
-            style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 26),
-          ),
-        ),
-        Padding(padding: EdgeInsets.only(top: 15)),
-        Center(
-          child: Text(
-            "|| Year",
-            style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 16),
-          ),
-        ),
+        welcomeBackCard(),
         Padding(padding: EdgeInsets.only(top: 50)),
         toggleButton(),
         if(decider)
@@ -63,11 +47,41 @@ class _StaffProfileViewState extends State<StaffProfileView> {
       ],
     );
   }
-  Widget toggleButton(){
+  Widget welcomeBackCard(){
+    DateTime now = new DateTime.now();
+    DateTime date = new DateTime(now.year, now.month, now.day);
+    return Padding(
+      padding: const EdgeInsets.only(left: 15,right: 15),
+      child: Container(
+        // height: height/6,
+        width: double.infinity,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            // border: Border.all(color: Colors.black,width: 1.0),
+            color: Color(0xFF27397A)
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(padding: EdgeInsets.only(top: 20)),
+              Text(" April 15, 2024",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 14,color: Colors.grey.shade400),),
+              Padding(padding: EdgeInsets.only(top: 20)),
+              Text("Welcome Back, Prakash!",style: TextStyle(fontFamily: "Raleway",fontSize: 18,color: Colors.white),),
+              Padding(padding: EdgeInsets.only(top: 3)),
+              Text("CCE - ||",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 14,color: Colors.grey.shade400),),
+              Padding(padding: EdgeInsets.only(top: 20)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+  Widget toggleButton() {
     return ToggleButtons(
-      fillColor : Colors.white,
+      fillColor: Colors.white,
       renderBorder: false,
-      // direction: Axis.horizontal,
       onPressed: (int index) {
         setState(() {
           for (int i = 0; i < _selectedButtons.length; i++) {
@@ -77,52 +91,39 @@ class _StaffProfileViewState extends State<StaffProfileView> {
         });
       },
       borderRadius: BorderRadius.circular(10),
-      // fillColor: Colors.blue[200],
       constraints: BoxConstraints(
         minHeight: 50,
-        minWidth: 50,
       ),
       isSelected: _selectedButtons,
       children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: _selectedButtons[0]
-                  ? Colors.blue[400]
-                  : Colors.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            padding: const EdgeInsets.all(5),
-            alignment: Alignment.center,
-            child: const Text(
-              "Performance",
-              style: TextStyle(color: Colors.black),
-            ),
+        Container(
+          decoration: BoxDecoration(
+            color: _selectedButtons[0] ? Colors.blue[400] : Colors.white,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          padding: const EdgeInsets.all(10),
+          alignment: Alignment.center,
+          child: const Text(
+            "Performance",
+            style: TextStyle(color: Colors.black,fontFamily: "Raleway"),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: _selectedButtons[1]
-                  ? Colors.blue[400]
-                  : Colors.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            padding: const EdgeInsets.all(5),
-            alignment: Alignment.center,
-            child: const Text(
-              "Personal details",
-              style: TextStyle(color: Colors.black),
-            ),
+        Container(
+          decoration: BoxDecoration(
+            color: _selectedButtons[1] ? Colors.blue[400] : Colors.white,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          padding: const EdgeInsets.all(10),
+          alignment: Alignment.center,
+          child: const Text(
+            "Personal details",
+            style: TextStyle(color: Colors.black,fontFamily: "Raleway"),
           ),
         ),
-        // else
-        //   personalDetails()
       ],
     );
   }
+
 
   Widget performance(){
     List<String> performanceInfo = [
@@ -159,13 +160,13 @@ class _StaffProfileViewState extends State<StaffProfileView> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(color: Colors.black,width: 1),
-                            color: _performanceBool[index] ? Colors.blue : Colors.white
+                            color: _performanceBool[index] ? Colors.blue : Color(0xFF27397A)
                         ),
                         child: Column(
                           children: [
                             Padding(padding: EdgeInsets.only(top: 15)),
                             Center(
-                              child: Text(performanceInfo[index],style: TextStyle(fontFamily: "Raleway",fontSize: 18),),
+                              child: Text(performanceInfo[index],style: TextStyle(fontFamily: "Raleway",fontSize: 18,color: Colors.white),),
                             ),
                             Padding(padding: EdgeInsets.only(top: 15)),
                           ],
@@ -205,7 +206,7 @@ class _StaffProfileViewState extends State<StaffProfileView> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.black,width: 1),
-          color: Colors.white
+          color: Color(0xFF27397A)
         ),
         child: Padding(
           padding: const EdgeInsets.only(left: 15),
@@ -216,7 +217,7 @@ class _StaffProfileViewState extends State<StaffProfileView> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: List.generate(fdp.length, (index) {
-                  return Text(fdp[index],style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17),);
+                  return Text(fdp[index],style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17,color: Colors.white),);
                 }),
               ),
               Padding(padding: EdgeInsets.only(top: 15)),
@@ -242,7 +243,7 @@ class _StaffProfileViewState extends State<StaffProfileView> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: Border.all(color: Colors.black,width: 1),
-              color: Colors.white
+              color: Color(0xFF27397A)
             ),
             child: Padding(
               padding: const EdgeInsets.only(left: 10),
@@ -251,16 +252,16 @@ class _StaffProfileViewState extends State<StaffProfileView> {
                 children: [
                   Padding(padding: EdgeInsets.only(top: 15)),
                   Icon(Icons.school_outlined),
-                  Text("Educational Qualification",style: TextStyle(fontFamily: "Raleway",fontSize: 17),),
-                  Text(personalOut[0],style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 15),),
+                  Text("Educational Qualification",style: TextStyle(fontFamily: "Raleway",fontSize: 17,color: Colors.white),),
+                  Text(personalOut[0],style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 15,color: Colors.white),),
                   Padding(padding: EdgeInsets.only(top: 15)),
                   Icon(Icons.work),
-                  Text("Work Experience",style: TextStyle(fontFamily: "Raleway",fontSize: 17),),
-                  Text(personalOut[1],style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 15),),
+                  Text("Work Experience",style: TextStyle(fontFamily: "Raleway",fontSize: 17,color: Colors.white),),
+                  Text(personalOut[1],style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 15,color: Colors.white),),
                   Padding(padding: EdgeInsets.only(top: 15)),
                   Icon(Icons.star),
-                  Text("Area of specialization",style: TextStyle(fontFamily: "Raleway",fontSize: 17),),
-                  Text(personalOut[2],style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 15),),
+                  Text("Area of specialization",style: TextStyle(fontFamily: "Raleway",fontSize: 17,color: Colors.white),),
+                  Text(personalOut[2],style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 15,color: Colors.white),),
                   Padding(padding: EdgeInsets.only(top: 15)),
                 ],
               ),

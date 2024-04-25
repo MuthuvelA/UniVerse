@@ -31,98 +31,116 @@ class _UserProfileState extends State<UserProfile> {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 198, 208, 244),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text("PROFILE",style: TextStyle(fontFamily: "Raleway",fontSize: 17,color: Colors.white),),
+        backgroundColor: Color(0xFF27397A)
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(padding: EdgeInsets.only(top: 50)),
-            Center(
-              child: Text(
-                "Prakash kumar",
-                style: TextStyle(fontFamily: "Raleway",fontSize: 36),
-              ),
-            ),
-            Padding(padding: EdgeInsets.only(top: 3)),
-            Center(
-              child: Text(
-                "CCE",
-                style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 26),
-              ),
-            ),
-            Padding(padding: EdgeInsets.only(top: 15)),
-            Center(
-              child: Text(
-                "|| Year",
-                style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 16),
-              ),
-            ),
+            Padding(padding: EdgeInsets.only(top: 20)),
+            welcomeBackCard(),
             Padding(padding: EdgeInsets.only(top: 50)),
 
-        ToggleButtons(
-          fillColor : Colors.white,
-          renderBorder: false,
-          // direction: Axis.horizontal,
-          onPressed: (int index) {
-            setState(() {
-              for (int i = 0; i < _selectedButtons.length; i++) {
-                _selectedButtons[i] = (i == index);
-              }
-              decider = (index == 0);
-            });
-          },
-          borderRadius: BorderRadius.circular(10),
-          // fillColor: Colors.blue[200],
-          constraints: BoxConstraints(
-            minHeight: 50,
-            minWidth: 50,
-          ),
-          isSelected: _selectedButtons,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: _selectedButtons[0]
-                      ? Colors.blue[400]
-                      : Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                padding: const EdgeInsets.all(5),
-                alignment: Alignment.center,
-                child: const Text(
-                  "Performance",
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: _selectedButtons[1]
-                      ? Colors.blue[400]
-                      : Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                padding: const EdgeInsets.all(5),
-                alignment: Alignment.center,
-                child: const Text(
-                  "Personal details",
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-            ),
-            // else
-            //   personalDetails()
-          ],
-        ),
-
+        toggle(),
             if (decider)
               Performance(width, height)
             else
               groups(),
 
           ],
+        ),
+      ),
+    );
+  }
+  Widget toggle(){
+    return ToggleButtons(
+      fillColor : Colors.white,
+      renderBorder: false,
+      // direction: Axis.horizontal,
+      onPressed: (int index) {
+        setState(() {
+          for (int i = 0; i < _selectedButtons.length; i++) {
+            _selectedButtons[i] = (i == index);
+          }
+          decider = (index == 0);
+        });
+      },
+      borderRadius: BorderRadius.circular(10),
+      // fillColor: Colors.blue[200],
+      constraints: BoxConstraints(
+        minHeight: 50,
+        minWidth: 50,
+      ),
+      isSelected: _selectedButtons,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: _selectedButtons[0]
+                  ? Colors.blue[400]
+                  : Colors.white,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            padding: const EdgeInsets.all(5),
+            alignment: Alignment.center,
+            child: const Text(
+              "Performance",
+              style: TextStyle(color: Colors.black),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: _selectedButtons[1]
+                  ? Colors.blue[400]
+                  : Colors.white,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            padding: const EdgeInsets.all(5),
+            alignment: Alignment.center,
+            child: const Text(
+              "Personal details",
+              style: TextStyle(color: Colors.black),
+            ),
+          ),
+        ),
+        // else
+        //   personalDetails()
+      ],
+    );
+  }
+  Widget welcomeBackCard(){
+    DateTime now = new DateTime.now();
+    DateTime date = new DateTime(now.year, now.month, now.day);
+    return Padding(
+      padding: const EdgeInsets.only(left: 15,right: 15),
+      child: Container(
+        // height: height/6,
+        width: double.infinity,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            // border: Border.all(color: Colors.black,width: 1.0),
+            color: Color(0xFF27397A)
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(padding: EdgeInsets.only(top: 20)),
+              Text(" April 15, 2024",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 14,color: Colors.grey.shade400),),
+              Padding(padding: EdgeInsets.only(top: 20)),
+              Text("Welcome Back, Prakash!",style: TextStyle(fontFamily: "Raleway",fontSize: 18,color: Colors.white),),
+              Padding(padding: EdgeInsets.only(top: 3)),
+              Text("Always Stay Updated :)",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 14,color: Colors.grey.shade400),),
+              Padding(padding: EdgeInsets.only(top: 20)),
+            ],
+          ),
         ),
       ),
     );
@@ -148,25 +166,28 @@ class _UserProfileState extends State<UserProfile> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.black,width: 1),
-          color: Colors.white
+          color: Color(0xFF27397A)
       ),
-      child: Column(
-        children: [
-          Padding(padding: EdgeInsets.only(top: 15)),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: List.generate(refOut.length, (index) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(refInfo[index],style: TextStyle(fontFamily: "Raleway",fontSize: 17),),
-                  Text(refOut[index],style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17),),
-                ],
-              );
-            }),
-          ),
-          Padding(padding: EdgeInsets.only(top: 15)),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.only(left: 15,right: 15),
+        child: Column(
+          children: [
+            Padding(padding: EdgeInsets.only(top: 15)),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: List.generate(refOut.length, (index) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(refInfo[index],style: TextStyle(fontFamily: "Raleway",fontSize: 17,color: Colors.white),),
+                    Text(refOut[index],style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17,color: Colors.white),),
+                  ],
+                );
+              }),
+            ),
+            Padding(padding: EdgeInsets.only(top: 15)),
+          ],
+        ),
       ),
     );
   }
@@ -183,25 +204,28 @@ class _UserProfileState extends State<UserProfile> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.black,width: 1),
-          color: Colors.white
+          color: Color(0xFF27397A)
       ),
-      child: Column(
-        children: [
-          Padding(padding: EdgeInsets.only(top: 15)),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: List.generate(bankInfo.length, (index) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(bankInfo[index],style: TextStyle(fontFamily: "Raleway",fontSize: 17),),
-                  Text(bankOut[index],style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17),),
-                ],
-              );
-            }),
-          ),
-          Padding(padding: EdgeInsets.only(top: 15)),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.only(left: 15,right: 15),
+        child: Column(
+          children: [
+            Padding(padding: EdgeInsets.only(top: 15)),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: List.generate(bankInfo.length, (index) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(bankInfo[index],style: TextStyle(fontFamily: "Raleway",fontSize: 17,color: Colors.white),),
+                    Text(bankOut[index],style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17,color: Colors.white),),
+                  ],
+                );
+              }),
+            ),
+            Padding(padding: EdgeInsets.only(top: 15)),
+          ],
+        ),
       ),
     );
   }
@@ -224,25 +248,28 @@ class _UserProfileState extends State<UserProfile> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.black,width: 1),
-          color: Colors.white
+          color: Color(0xFF27397A)
       ),
-      child: Column(
-        children: [
-          Padding(padding: EdgeInsets.only(top: 15)),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: List.generate(governInfo.length, (index) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(governInfo[index],style: TextStyle(fontFamily: "Raleway",fontSize: 17),),
-                  Text(governOut[index],style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17),),
-                ],
-              );
-            }),
-          ),
-          Padding(padding: EdgeInsets.only(top: 15)),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.only(left: 15,right: 15),
+        child: Column(
+          children: [
+            Padding(padding: EdgeInsets.only(top: 15)),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: List.generate(governInfo.length, (index) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(governInfo[index],style: TextStyle(fontFamily: "Raleway",fontSize: 17,color: Colors.white),),
+                    Text(governOut[index],style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17,color: Colors.white),),
+                  ],
+                );
+              }),
+            ),
+            Padding(padding: EdgeInsets.only(top: 15)),
+          ],
+        ),
       ),
     );
   }
@@ -269,25 +296,28 @@ class _UserProfileState extends State<UserProfile> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.black,width: 1),
-          color: Colors.white
+          color: Color(0xFF27397A)
       ),
-      child: Column(
-        children: [
-          Padding(padding: EdgeInsets.only(top: 15)),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: List.generate(personalInfo.length, (index) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(personalInfo[index],style: TextStyle(fontFamily: "Raleway",fontSize: 17),),
-                  Text(personalOut[index],style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17),),
-                ],
-              );
-            }),
-          ),
-          Padding(padding: EdgeInsets.only(top: 15)),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.only(left: 15,right: 15),
+        child: Column(
+          children: [
+            Padding(padding: EdgeInsets.only(top: 15)),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: List.generate(personalInfo.length, (index) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(personalInfo[index],style: TextStyle(fontFamily: "Raleway",fontSize: 17,color: Colors.white),),
+                    Text(personalOut[index],style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17,color: Colors.white),),
+                  ],
+                );
+              }),
+            ),
+            Padding(padding: EdgeInsets.only(top: 15)),
+          ],
+        ),
       ),
     );
   }
@@ -311,9 +341,9 @@ class _UserProfileState extends State<UserProfile> {
                 // shape: BoxShape.circle,
                   borderRadius: BorderRadius.circular(100),
                   border: Border.all(color: Colors.black,width: 1),
-                  color: personalDecider ? Colors.blue : Colors.white
+                  color: personalDecider ? Colors.blue : Color(0xFF27397A)
               ),
-              child: Center(child: Text("Personal Information")),
+              child: Center(child: Text("Personal Information",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),)),
             ),
           ),
           if(personalDecider)
@@ -333,9 +363,9 @@ class _UserProfileState extends State<UserProfile> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.black,width: 1),
-                  color: governDecider ? Colors.blue : Colors.white
+                  color: governDecider ? Colors.blue : Color(0xFF27397A)
               ),
-              child: Center(child: Text("Government ID's")),
+              child: Center(child: Text("Government ID's",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),)),
             ),
           ),
           if(governDecider)
@@ -355,9 +385,9 @@ class _UserProfileState extends State<UserProfile> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.black,width: 1),
-                  color: bankDecider ? Colors.blue : Colors.white
+                  color: bankDecider ? Colors.blue : Color(0xFF27397A)
               ),
-              child: Center(child: Text("Bank Details")),
+              child: Center(child: Text("Bank Details",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),)),
             ),
           ),
           if(bankDecider)
@@ -377,9 +407,9 @@ class _UserProfileState extends State<UserProfile> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.black,width: 1),
-                  color: referenceDecider ? Colors.blue : Colors.white
+                  color: referenceDecider ? Colors.blue : Color(0xFF27397A)
               ),
-              child: Center(child: Text("Reference Link")),
+              child: Center(child: Text("Reference Link",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),)),
             ),
           ),
           Padding(padding: EdgeInsets.only(top: 15)),
@@ -389,159 +419,163 @@ class _UserProfileState extends State<UserProfile> {
       ),
     );
   }
-  Column Performance(double width, double height) {
-    return Column(
-      children: [
+  Widget Performance(double width, double height) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 15,right: 15),
+      child: Column(
+        children: [
 
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(width / 20),
-            color: Colors.white,
-          ),
-          width: width,
-          height: height / 4.5,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(width / 20),
+              color: Color(0xFF27397A)
+            ),
+            width: width,
+            height: height / 4.5,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
 
-              Container(
-                width: width/8,
-                height: width/8,
-                decoration: const BoxDecoration(
-                  image:DecorationImage(
-                    image: AssetImage("assets/image/leetcode.png"),
-                    fit: BoxFit.fill,
+                Container(
+                  width: width/8,
+                  height: width/8,
+                  decoration: const BoxDecoration(
+                    image:DecorationImage(
+                      image: AssetImage("assets/image/leetcode.png"),
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
-              ),
 
-              const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
+                const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
 
-                children: [
-                  Text("Easy"),
-                  Text("Medium"),
-                  Text("Hard"),
-                ],
-              ),
-
-              const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("10"),
-                  Text("10"),
-                  Text("10"),
-                ],
-              ),
-
-              SizedBox(
-                width: width/5,
-                height: width/5,
-                child: const CircularProgressIndicator(
-                  value: 1,
+                  children: [
+                    Text("Easy",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
+                    Text("Medium",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
+                    Text("Hard",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
+                  ],
                 ),
-              ),
-            ],
-          ),
-        ),
 
-        Padding(padding: EdgeInsets.only(top: width / 20)),
+                const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("10",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
+                    Text("10",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
+                    Text("10",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
+                  ],
+                ),
 
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(width / 20),
-            color: Colors.white,
-          ),
-          width: width,
-          height: height / 5,
-          child : Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-
-              Container(
-                width: width/8,
-                height: width/8,
-                decoration: const BoxDecoration(
-                  image:DecorationImage(
-                    image: AssetImage("assets/image/icons8-codechef-50.png"),
-                    fit: BoxFit.fill,
+                SizedBox(
+                  width: width/5,
+                  height: width/5,
+                  child: const CircularProgressIndicator(
+                    color: Colors.white,
+                    value: 1,
                   ),
                 ),
-              ),
-
-              const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-
-                children: [
-                  Text("No of problems solved"),
-                  Text("Rating"),
-                  Text("Star"),
-                ],
-              ),
-
-              const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("10"),
-                  Text("10"),
-                  Text("3*"),
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
 
-        Padding(padding: EdgeInsets.only(top: width / 20)),
+          Padding(padding: EdgeInsets.only(top: width / 20)),
 
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(width / 20),
-            color: Colors.white,
-          ),
-          width: width,
-          height: height / 5,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(width / 20),
+              color: Color(0xFF27397A)
+            ),
+            width: width,
+            height: height / 5,
+            child : Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
 
-              Container(
-                width: width/8,
-                height: width/8,
-                decoration: const BoxDecoration(
-                  image:DecorationImage(
-                    image: AssetImage("assets/image/codeforces.png"),
-                    fit: BoxFit.fill,
+                Container(
+                  width: width/8,
+                  height: width/8,
+                  decoration: const BoxDecoration(
+                    image:DecorationImage(
+                      image: AssetImage("assets/image/icons8-codechef-50.png"),
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
-              ),
 
-              const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
+                const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
 
-                children: [
-                  Text("No of problems solved"),
-                  Text("Rating"),
-                  Text("Position"),
-                ],
-              ),
+                  children: [
+                    Text("No of problems solved",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
+                    Text("Rating",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
+                    Text("Star",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
+                  ],
+                ),
 
-              const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("10"),
-                  Text("10"),
-                  Text("Newbie"),
-                ],
-              ),
-            ],
+                const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("10",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
+                    Text("10",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
+                    Text("3*",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
 
-        Padding(padding: EdgeInsets.only(top: width / 20)),
-      ],
+          Padding(padding: EdgeInsets.only(top: width / 20)),
+
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(width / 20),
+              color: Color(0xFF27397A)
+            ),
+            width: width,
+            height: height / 5,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+
+                Container(
+                  width: width/8,
+                  height: width/8,
+                  decoration: const BoxDecoration(
+                    image:DecorationImage(
+                      image: AssetImage("assets/image/codeforces.png"),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
+
+                const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+
+                  children: [
+                    Text("No of problems solved",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
+                    Text("Rating",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
+                    Text("Position",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
+                  ],
+                ),
+
+                const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("10",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
+                    Text("10",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
+                    Text("Newbie",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
+                  ],
+                ),
+              ],
+            ),
+          ),
+
+          Padding(padding: EdgeInsets.only(top: width / 20)),
+        ],
+      ),
     );
   }
 }
