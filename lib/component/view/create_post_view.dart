@@ -17,6 +17,24 @@ class _CreatePostViewState extends State<CreatePostView> {
   //   _controller = QuillController.basic();
   //   _toolbar = QuillToolbar.bas
   // }
+  List<String> personalizedCheckbox = [
+    "CCE",
+    "CSE",
+    "ECE",
+    "CSBS",
+    "MECH",
+    "student",
+    "staff"
+  ];
+  Map<String,dynamic> finalReport = {};
+  List<String> finalPersonalizedList = [];
+  late List<bool> checkboxController;
+
+  @override
+  void initState(){
+    super.initState();
+    checkboxController = List.filled(personalizedCheckbox.length, false);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +51,7 @@ class _CreatePostViewState extends State<CreatePostView> {
     return Padding(
       padding: const EdgeInsets.only(left: 15,right: 15),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             decoration: BoxDecoration(
@@ -69,11 +88,41 @@ class _CreatePostViewState extends State<CreatePostView> {
             ),
           ),
           Padding(padding: EdgeInsets.only(top: 15)),
-          MaterialButton(onPressed: (){
-      
-          },
-            child: Text("Publish",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17,color: Colors.white),),
-            color: Colors.blue,
+          Text("Personalize Your Post",style: TextStyle(fontFamily: "Raleway",fontSize: 17),),
+          Column(
+            children: List.generate(personalizedCheckbox.length, (index) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("${personalizedCheckbox[index]}",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 16,color: Colors.black),),
+                  Checkbox(
+                    value: checkboxController[index],
+                    onChanged: (value) {
+                      setState(() {
+                        checkboxController[index] = value!;
+                        if(checkboxController[index]){
+                          finalPersonalizedList.add(personalizedCheckbox[index]);
+                        }
+                      });
+                    },
+                  ),
+                ],
+              );
+            }),
+          ),
+
+          Center(
+            child: MaterialButton(onPressed: (){
+              finalReport = {
+                "title" : tittleController.text,
+                "post" : createPostController.text,
+                "filter" : finalPersonalizedList
+              };
+              debugPrint("${finalReport}");
+            },
+              child: Text("Publish",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17,color: Colors.white),),
+              color: Colors.blue,
+            ),
           )
         ],
       ),
