@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:universe/component/view/admin_dashboard_view.dart';
 import 'package:universe/component/view/login_view.dart';
 import 'package:universe/component/view/staff_dashboard_view.dart';
 import 'package:universe/component/view/staff_profile_view.dart';
@@ -20,13 +21,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: "/staffDash",
+      initialRoute: "/adminDash",
       routes: {
         "/login" : (context) =>  const LoginView(),
         "/staffDash" : (context) => const StaffDashboardView(),
         "/studentDash" : (context) => const StudentDashboardView(post:[]),
         "/studentProfile" : (context) => const UserProfile(),
-        "/staffProfile" : (context) => const StaffProfileView()
+        "/staffProfile" : (context) => const StaffProfileView(),
+        "/adminDash" : (context) => const AdminDashboardView()
       },
     );
   }
