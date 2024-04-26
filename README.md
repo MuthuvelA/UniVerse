@@ -31,7 +31,7 @@ Link to Backend Repository
 Contributors
 Contributors to UniVerse:
 
-- [@pra-kash](https://github.com/pra-kash) (PRAKASH KUMAR M)
+- [@pra-kash](https://github.com/pra-kas) (PRAKASH KUMAR M)
 - [@igopi77](https://github.com/igopi77) (GOPINATH S)
 We welcome contributions from the community! If you would like to contribute to UniVerse, please follow these guidelines:
     * Fork the repository and create your branch for development.
