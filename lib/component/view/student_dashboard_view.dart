@@ -3,7 +3,8 @@ import 'package:universe/component/view/student_personal_details_form_view.dart'
 import 'package:universe/component/view/student_profile.dart';
 
 class StudentDashboardView extends StatefulWidget {
-  const StudentDashboardView({super.key});
+  final List<dynamic>post;
+  const StudentDashboardView({super.key,required this.post});
 
   @override
   State<StudentDashboardView> createState() => _StudentDashboardViewState();
@@ -16,7 +17,7 @@ class _StudentDashboardViewState extends State<StudentDashboardView> {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-        appBar: AppBar(title: Text(""),),
+        appBar: AppBar(title: const Text(""),),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
             child: bodyPartOfDashboard(width,height)),
@@ -28,7 +29,7 @@ class _StudentDashboardViewState extends State<StudentDashboardView> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          DrawerHeader(
+          const DrawerHeader(
               decoration: BoxDecoration(
                   color: Color(0xFF27397A)
               ),
@@ -82,9 +83,9 @@ class _StudentDashboardViewState extends State<StudentDashboardView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           welcomeBackCard(width,height),
-          SizedBox(height: 50,),
-          Text("Quick Recap",style: TextStyle(fontFamily: "Raleway",fontSize: 17),),
-          Padding(padding: EdgeInsets.only(top: 10)),
+          const SizedBox(height: 50,),
+          const Text("Quick Recap",style: TextStyle(fontFamily: "Raleway",fontSize: 17),),
+          const Padding(padding: EdgeInsets.only(top: 10)),
           quickRecap(),
         ],
       ),
@@ -92,7 +93,7 @@ class _StudentDashboardViewState extends State<StudentDashboardView> {
   }
   Widget quickRecap(){
     return Column(
-      children: List.generate(10, (index) {
+      children: List.generate(widget.post.length, (index) {
         return Padding(
           padding: const EdgeInsets.only(left: 10,right: 10),
           child: Column(
@@ -101,26 +102,27 @@ class _StudentDashboardViewState extends State<StudentDashboardView> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.black,width: 1),
-                    color: Color(0xFF27397A)
+                    color: const Color(0xFF27397A)
                 ),
                 child: Column(
                   children: [
-                    Padding(padding: EdgeInsets.only(top: 20)),
+                    const Padding(padding: EdgeInsets.only(top: 20)),
                     Center(
-                      child: Text("Hackathon",style: TextStyle(fontFamily: "Raleway",fontSize: 17,color: Colors.white),),
+                      child: Text(widget.post[index]["title"]!,style: TextStyle(fontFamily: "Raleway",fontSize: 17,color: Colors.white),),
                     ),
-                    Padding(padding: EdgeInsets.only(top: 20)),
+                    const Padding(padding: EdgeInsets.only(top: 20)),
                     Padding(
                       padding: const EdgeInsets.only(left: 10,right: 10),
-                      child: Text("VIGNAN'24, Nehru Institute of Engineering and Technology, National Level Technical Symposium, Coimbatore, Tamil Nadu, 16th April 2024",
-                        style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 16,color: Colors.white),
+                      child: Text(widget.post[index]["content"]!,
+                        style: const TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 16,color: Colors.white),
                       ),
                     ),
-                    Padding(padding: EdgeInsets.only(bottom: 20))
+                    const Padding(padding: EdgeInsets.only(top: 20)),
+                    widget.post[index]["postType"] != ' ' ? Text(widget.post[index]["postType"]!,style: const TextStyle(fontFamily: "Raleway",fontSize: 17,color: Colors.white),) : const Text("Admin",style: TextStyle(fontFamily: "Raleway",fontSize: 17,color: Colors.white)),
                   ],
                 ),
               ),
-              Padding(padding: EdgeInsets.only(top: 20)),
+              const Padding(padding: EdgeInsets.only(top: 20)),
             ],
           ),
         );
@@ -135,20 +137,20 @@ class _StudentDashboardViewState extends State<StudentDashboardView> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.black,width: 1.0),
-          color: Color(0xFF27397A)
+          color: const Color(0xFF27397A)
       ),
       child: Padding(
         padding: const EdgeInsets.only(left: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(padding: EdgeInsets.only(top: 20)),
+            const Padding(padding: EdgeInsets.only(top: 20)),
             Text(" April 15, 2024",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 14,color: Colors.grey.shade400),),
             Padding(padding: EdgeInsets.only(top: height/20)),
-            Text("Welcome Back, Gopinath!",style: TextStyle(fontFamily: "Raleway",fontSize: 18,color: Colors.white),),
-            Padding(padding: EdgeInsets.only(top: 3)),
+            const Text("Welcome Back, Gopinath!",style: TextStyle(fontFamily: "Raleway",fontSize: 18,color: Colors.white),),
+            const Padding(padding: EdgeInsets.only(top: 3)),
             Text("Always Stay Updated :)",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 14,color: Colors.grey.shade400),),
-            Padding(padding: EdgeInsets.only(top: 20))
+            const Padding(padding: EdgeInsets.only(top: 20))
           ],
         ),
       ),

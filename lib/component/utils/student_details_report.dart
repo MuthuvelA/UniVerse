@@ -31,9 +31,11 @@ class StudentDetailsReport {
     "codechef",
     "codeforces"
   ];
-  Map<String,dynamic> finalReport = {};
+
+  static Map<String,dynamic> finalReport = {};
   Map<String,dynamic> personalMap = {};
   Map<String,dynamic> codingMap = {};
+
   void allAboutStudent(List<TextEditingController> personal,List<TextEditingController> coding){
     for(int i=0;i<personal.length;i++){
      if(personal[i].text.isNotEmpty){
