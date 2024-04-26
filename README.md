@@ -7,13 +7,15 @@ Features
 👩‍🏫 Faculty management tools for scheduling classes, managing course materials, and evaluating student progress.
 💼 Administrative features for managing institutional resources, facilities, and financial transactions.
 🚀 Scalable architecture that can adapt to the size and complexity of educational institutions, from small schools to large universities.
+
 Installation
 To install UniVerse, follow these steps:
 
-Clone this repository to your local machine using git clone https://github.com/MuthuvelA/UniVerse.git
-Navigate to the project directory: cd UniverseFrontend
-Install dependencies: flutter pub get
-Start the development server: flutter run
+* Clone this repository to your local machine using git clone https://github.com/MuthuvelA/UniVerse.git
+* Navigate to the project directory: cd UniverseFrontend
+* Install dependencies: flutter pub get
+* Start the development server: flutter run
+
 Usage
 To use UniVerse, follow these steps:
 
@@ -21,16 +23,16 @@ To use UniVerse, follow these steps:
 🛠 Configure modules for student management, faculty administration, and institutional resources.
 📖 Train staff members on how to use the software effectively for day-to-day operations.
 🔍 Continuously monitor and optimize the software to ensure smooth functioning and user satisfaction.
+
 Tech Stack
 UniVerse is built using the following technologies:
 
 Frontend: Dart, Flutter
 Backend: Node.js, Express.js, MongoDB
-Link to Backend Repository
+Link to Backend Repository : https://github.com/MuthuvelA/UniVerse-Backend
 
-Contributors
+
 Contributors to UniVerse:
-
 - [@pra-kash](https://github.com/pra-kas) (PRAKASH KUMAR M)
 - [@igopi77](https://github.com/igopi77) (GOPINATH S)
 We welcome contributions from the community! If you would like to contribute to UniVerse, please follow these guidelines:
