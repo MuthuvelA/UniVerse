@@ -42,7 +42,9 @@ class _CreatePostViewState extends State<CreatePostView> {
         title: const Text("Create Post",style: TextStyle(fontFamily: "Raleway",fontSize: 18),),
         centerTitle: true,
       ),
-      body: bodyPartForPost(),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+          child: bodyPartForPost()),
     );
   }
   Widget bodyPartForPost(){

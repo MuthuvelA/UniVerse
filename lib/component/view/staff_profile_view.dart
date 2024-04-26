@@ -51,7 +51,7 @@ class _StaffProfileViewState extends State<StaffProfileView> {
     DateTime now = new DateTime.now();
     DateTime date = new DateTime(now.year, now.month, now.day);
     return Padding(
-      padding: const EdgeInsets.only(left: 15,right: 15),
+      padding: const EdgeInsets.only(top: 10,left: 15,right: 15),
       child: Container(
         // height: height/6,
         width: double.infinity,
