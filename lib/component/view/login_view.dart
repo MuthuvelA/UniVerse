@@ -133,7 +133,8 @@ class _LoginViewState extends State<LoginView> {
                             });
                             Map<dynamic,dynamic> mp = await validateLogin();
                             if(mp['status']){
-                                if(userCredentials.get_user_type() == 'student') Navigator.push(context, MaterialPageRoute(builder: (context) => StudentDashboardView(post:mp['post'])));
+                              print("HEllo");
+                                if(userCredentials.get_user_type() == 'Student') Navigator.push(context, MaterialPageRoute(builder: (context) => StudentDashboardView(post:mp['post'])));
                                 if(userCredentials.get_user_type() == 'Teacher') Navigator.push(context, MaterialPageRoute(builder: (context) => const StaffDashboardView()));
                             }
                             // if(await validateLogin()){

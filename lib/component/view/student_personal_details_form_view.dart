@@ -23,13 +23,12 @@ class _StudentDetailsFormViewState extends State<StudentDetailsFormView> {
   }
   Widget bodyPartOfForm(){
     TextEditingController nameController = TextEditingController();
-    TextEditingController rollNoController = TextEditingController();
     TextEditingController departmentController = TextEditingController();
     TextEditingController emailAddressController = TextEditingController();
     TextEditingController phoneNumberController = TextEditingController();
     TextEditingController dobController = TextEditingController();
     TextEditingController addressController = TextEditingController();
-    TextEditingController parentNameController = TextEditingController();
+    TextEditingController fatherNameController = TextEditingController();
     TextEditingController motherNameController = TextEditingController();
     TextEditingController bloodGroupController = TextEditingController();
     TextEditingController aadhaarCardNumberController = TextEditingController();
@@ -47,13 +46,12 @@ class _StudentDetailsFormViewState extends State<StudentDetailsFormView> {
 
     List<TextEditingController> personalDetailsControllers = [
       nameController,
-      rollNoController,
       departmentController,
       emailAddressController,
       phoneNumberController,
       dobController,
       addressController,
-      parentNameController,
+      fatherNameController,
       motherNameController,
       bloodGroupController,
       aadhaarCardNumberController,
@@ -71,13 +69,12 @@ class _StudentDetailsFormViewState extends State<StudentDetailsFormView> {
     ];
     List<String> personalDetails = [
       "Name",
-      "Roll No",
       "Department",
       "Email Address",
       "Phone Number",
       "Date of Birth",
       "Address",
-      "Parent Name",
+      "Father Name",
       "Mother Name",
       "Blood Group",
       "Aadhaar Card Number",
@@ -117,7 +114,7 @@ class _StudentDetailsFormViewState extends State<StudentDetailsFormView> {
                       controller: personalDetailsControllers[index],
                     ),
                   ),
-                  Padding(padding: EdgeInsets.only(top: 20))
+                  const Padding(padding: EdgeInsets.only(top: 20))
                 ],
               );
             }),
@@ -125,6 +122,7 @@ class _StudentDetailsFormViewState extends State<StudentDetailsFormView> {
           Center(
             child: MaterialButton(
               onPressed: () {
+                print(personalDetails);
                 Navigator.push(context, MaterialPageRoute(builder: (context) =>  StudentCodingDetailsForm(personalDetailsController: personalDetailsControllers,)));
               },
               child: Text("Next",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 16,color: Colors.white),),

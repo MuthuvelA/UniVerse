@@ -3,29 +3,29 @@ import 'package:flutter/cupertino.dart';
 
 class StudentDetailsReport {
   List<String> personalDetails = [
-    "Name",
-    "Roll No",
-    "Department",
-        "Email Address",
-    "Phone Number",
-    "Date of Birth",
-    "Address",
-    "Parent Name",
-    "Mother Name",
-    "Blood Group",
-    "Aadhaar Card Number",
-    "Aadhaar Card Link",
-    "PAN Card Number",
-    "PAN Card Link",
-    "Driving License Number",
-    "Driving License Link",
-    "Voter ID Number",
-    "Voter ID Link",
-    "Passport Number",
-    "Passport Link",
-    "Bank Account Number",
-    "Bank Account Link",
-  ];
+  "name",
+  "department",
+  "emailAddress",
+  "phoneNumber",
+  "dateOfBirth",
+  "address",
+  "fatherName",
+  "motherName",
+  "bloodGroup",
+  "aadhaarCardNumber",
+  "aadhaarCardLink",
+  "panCardNumber",
+  "panCardLink",
+  "drivingLicenseNumber",
+  "drivingLicenseLink",
+  "voterIdNumber",
+  "voterIdLink",
+  "passportNumber",
+  "passportLink",
+  "bankAccountNumber",
+  "bankAccountLink",
+];
+
   List<String> codingDetails = [
     "leetcode",
     "codechef",
@@ -33,8 +33,8 @@ class StudentDetailsReport {
   ];
 
   static Map<String,dynamic> finalReport = {};
-  Map<String,dynamic> personalMap = {};
-  Map<String,dynamic> codingMap = {};
+  static Map<String,dynamic> personalMap = {};
+  static Map<String,dynamic> codingMap = {};
 
   void allAboutStudent(List<TextEditingController> personal,List<TextEditingController> coding){
     for(int i=0;i<personal.length;i++){
