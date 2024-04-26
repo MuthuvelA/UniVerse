@@ -31,7 +31,6 @@ Backend: Node.js, Express.js, MongoDB
 
 Link to Backend Repository : https://github.com/MuthuvelA/UniVerse-Backend
 
-Contributors
 Contributors to UniVerse:
 
 * PRAKASH KUMAR M (@pra-kash)
