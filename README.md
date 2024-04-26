@@ -28,13 +28,14 @@ UniVerse is built using the following technologies:
 
 Frontend: Dart, Flutter
 Backend: Node.js, Express.js, MongoDB
+
 Link to Backend Repository : https://github.com/MuthuvelA/UniVerse-Backend
 
 Contributors
 Contributors to UniVerse:
 
-PRAKASH KUMAR M (pra-kash)
-GOPINATH S (igopi77)
+* PRAKASH KUMAR M (@pra-kash)
+* GOPINATH S (@igopi77)
 
 We welcome contributions from the community! If you would like to contribute to UniVerse, please follow these guidelines:
 
