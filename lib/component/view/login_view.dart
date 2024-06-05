@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:universe/component/utils/credentials.dart';
+import 'package:universe/component/model/credentials.dart';
 import 'package:universe/component/view/staff_dashboard_view.dart';
 import 'package:universe/component/view/student_dashboard_view.dart';
 import 'package:universe/service/loginService.dart';
@@ -133,7 +133,8 @@ class _LoginViewState extends State<LoginView> {
                             });
                             Map<dynamic,dynamic> mp = await validateLogin();
                             if(mp['status']){
-                                if(userCredentials.get_user_type() == 'student') Navigator.push(context, MaterialPageRoute(builder: (context) => StudentDashboardView(post:mp['post'])));
+                              print("From Login : ${userCredentials.get_user_type()}"  );
+                                if(userCredentials.get_user_type() == 'Student') Navigator.push(context, MaterialPageRoute(builder: (context) => StudentDashboardView(post:mp['post'])));
                                 if(userCredentials.get_user_type() == 'Teacher') Navigator.push(context, MaterialPageRoute(builder: (context) => const StaffDashboardView()));
                             }
                             // if(await validateLogin()){

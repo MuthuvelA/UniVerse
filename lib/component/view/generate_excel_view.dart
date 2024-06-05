@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:universe/component/utils/reportList.dart';
+import 'package:universe/component/model/reportList.dart';
 import 'package:universe/service/excel_download.dart';
 import 'package:universe/service/excel_download_service.dart';
 

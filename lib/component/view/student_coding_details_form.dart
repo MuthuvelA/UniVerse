@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:universe/component/utils/student_details_report.dart';
+import 'package:universe/component/model/student_details_report.dart';
 
 class StudentCodingDetailsForm extends StatefulWidget {
   StudentCodingDetailsForm({super.key, required this.personalDetailsController});
