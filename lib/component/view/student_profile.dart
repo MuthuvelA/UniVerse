@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:universe/component/model/student_details.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({super.key});
@@ -135,7 +136,7 @@ class _UserProfileState extends State<UserProfile> {
               Padding(padding: EdgeInsets.only(top: 20)),
               Text(" April 15, 2024",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 14,color: Colors.grey.shade400),),
               Padding(padding: EdgeInsets.only(top: 20)),
-              Text("Welcome Back, Prakash!",style: TextStyle(fontFamily: "Raleway",fontSize: 18,color: Colors.white),),
+              Text("Welcome Back, ${StudentDetails.personalMap["name"]}!",style: TextStyle(fontFamily: "Raleway",fontSize: 18,color: Colors.white),),
               Padding(padding: EdgeInsets.only(top: 3)),
               Text("Always Stay Updated :)",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 14,color: Colors.grey.shade400),),
               Padding(padding: EdgeInsets.only(top: 20)),
@@ -197,8 +198,8 @@ class _UserProfileState extends State<UserProfile> {
       "Bank Account link"
     ];
     List<String> bankOut = [
-      "12345433",
-      "fsdfskfh"
+      StudentDetails.personalMap["bankAccountNumber"] ?? "Please update it",
+      StudentDetails.personalMap["bankAccountLink"] ?? "Please update it"
     ];
     return Container(
       decoration: BoxDecoration(
@@ -233,16 +234,16 @@ class _UserProfileState extends State<UserProfile> {
     List<String> governInfo = [
       "aadhaarCardNumber",
       "panCardNumber",
-      "drivingLicenseNumber",
+      "drivingLicense",
       "voterIdNumber",
       "passportNumber"
     ];
     List<String> governOut = [
-      "1234",
-      "4321",
-      "0987",
-      "7564",
-      "47293"
+      StudentDetails.personalMap["aadhaarCardLink"] ?? "Please update it" ,
+      StudentDetails.personalMap["panCardNumber"] ?? "Please update it" ,
+      StudentDetails.personalMap["drivingLicenseNumber"] ?? "Please update it" ,
+      StudentDetails.personalMap["voterIdNumber"] ?? "Please update it" ,
+      StudentDetails.personalMap["passportNumber"] ?? "Please update it"
     ];
     return Container(
       decoration: BoxDecoration(
@@ -284,39 +285,43 @@ class _UserProfileState extends State<UserProfile> {
       "bloodGroup"
     ];
     List<String> personalOut = [
-      "abc@gmail.com",
-      "9344751909",
-      "01/052005",
-      "1223",
-      "Kumar",
-      "Kumari",
-      "A+"
+      StudentDetails.personalMap["emailAddress"] ?? "Please update it",
+      StudentDetails.personalMap["phoneNumber"] ?? "Please update it",
+      "01/05/2005",
+      StudentDetails.personalMap["address"] ?? "Please update it",
+      StudentDetails.personalMap["parentName"] ?? "Please update it",
+      StudentDetails.personalMap["motherName"] ?? "Please update it",
+      StudentDetails.personalMap["bloodGroup"] ?? "Please update it"
     ];
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.black,width: 1),
-          color: Color(0xFF27397A)
-      ),
-      child: Padding(
-        padding: const EdgeInsets.only(left: 15,right: 15),
-        child: Column(
-          children: [
-            Padding(padding: EdgeInsets.only(top: 15)),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: List.generate(personalInfo.length, (index) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(personalInfo[index],style: TextStyle(fontFamily: "Raleway",fontSize: 17,color: Colors.white),),
-                    Text(personalOut[index],style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17,color: Colors.white),),
-                  ],
-                );
-              }),
-            ),
-            Padding(padding: EdgeInsets.only(top: 15)),
-          ],
+    return Padding(
+      padding: const EdgeInsets.only(left: 10,right: 10),
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: Colors.black,width: 1),
+            color: Color(0xFF27397A)
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 15,right: 15),
+          child: Column(
+            children: [
+              Padding(padding: EdgeInsets.only(top: 15)),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: List.generate(personalInfo.length, (index) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(personalInfo[index],style: TextStyle(fontFamily: "Raleway",fontSize: 17,color: Colors.white),),
+                      Text(personalOut[index],style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17,color: Colors.white),),
+                    ],
+                  );
+                }),
+              ),
+              Padding(padding: EdgeInsets.only(top: 15)),
+            ],
+          ),
         ),
       ),
     );
@@ -412,7 +417,6 @@ class _UserProfileState extends State<UserProfile> {
               child: Center(child: Text("Reference Link",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),)),
             ),
           ),
-          Padding(padding: EdgeInsets.only(top: 15)),
           if(referenceDecider)
             referenceView()
         ],
@@ -458,12 +462,12 @@ class _UserProfileState extends State<UserProfile> {
                   ],
                 ),
 
-                const Column(
+                Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("10",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
-                    Text("10",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
-                    Text("10",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
+                    Text("${StudentDetails.codingMap["leetcode"][1]["leetcodeEasy"]}",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
+                    Text("${StudentDetails.codingMap["leetcode"][1]["leetcodeMedium"]}",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
+                    Text("${StudentDetails.codingMap["leetcode"][1]["leetcodeHard"]}",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
                   ],
                 ),
 
@@ -514,12 +518,12 @@ class _UserProfileState extends State<UserProfile> {
                   ],
                 ),
 
-                const Column(
+                Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("10",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
-                    Text("10",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
-                    Text("3*",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
+                    Text("${StudentDetails.codingMap["codechef"][1]["codechefTotal"]}",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
+                    Text("${StudentDetails.codingMap["codechef"][0]["codechefCurrentRating"]}",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
+                    Text("${StudentDetails.codingMap["codechef"][0]["codechefStarRating"]}",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
                   ],
                 ),
               ],
@@ -561,12 +565,12 @@ class _UserProfileState extends State<UserProfile> {
                   ],
                 ),
 
-                const Column(
+                Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("10",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
-                    Text("10",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
-                    Text("Newbie",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
+                    Text("${StudentDetails.codingMap["codeforces"][1]["codeforcesTotal"]}",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
+                    Text("${StudentDetails.codingMap["codeforces"][0]["codeforcesRating"]}",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
+                    Text("${StudentDetails.codingMap["codeforces"][0]["position"]}",style: TextStyle(fontFamily: "Raleway-SemiBold",color: Colors.white),),
                   ],
                 ),
               ],

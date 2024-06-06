@@ -15,28 +15,40 @@ Future<dynamic> validateLogin() async {
     headers: {"content-Type": "application/json"},
     body: jsonEncode(reqBody),
   );
+  print("Flag 2");
 
   var decRes = jsonDecode(response.body);
-  Map<String,dynamic>  userDetails = Map<String,dynamic>.from(decRes["userDetails"]);
-  Map<String,dynamic> codingDetails = {};
-  Map<String,dynamic> personalDetails = {};
-  List<dynamic> codingDetailsFromBackend = userDetails["codingDetails"];
-  for (int i=0;i<codingDetailsFromBackend.length;i++) {
-    codingDetails[codingDetailsFromBackend[i]["platform"]] = {
-      codingDetailsFromBackend[i]["contest"],
-      codingDetailsFromBackend[i]["problemSolved"]
-    };
-  }
-  userDetails.forEach((key, value) {
-    if (key != "codingDetails") {
-      personalDetails[key] = value;
+  print("Flag 2");
+  try {
+    Map<String, dynamic> userDetails = Map<String, dynamic>.from(decRes["userDetails"]);
+    print("flag 3");
+    Map<String, dynamic> codingDetails = {};
+    Map<String, dynamic> personalDetails = {};
+    print("Flag 1");
+    List<dynamic> codingDetailsFromBackend = userDetails["codingDetails"];
+    for (int i = 0; i < codingDetailsFromBackend.length; i++) {
+      codingDetails[codingDetailsFromBackend[i]["platform"]] = [
+        codingDetailsFromBackend[i]["contest"],
+        codingDetailsFromBackend[i]["problemSolved"]
+      ];
     }
-  });
-  StudentDetails.personalMap = personalDetails;
-  StudentDetails.codingMap = codingDetails;
+    userDetails.forEach((key, value) {
+      if (key != "codingDetails") {
+        personalDetails[key] = value;
+      }
+    });
+    // StudentDetails.codingDetails[0] = userDetails["leetcode"];
+    // StudentDetails.codingDetails[1] = userDetails["codechef"];
+    StudentDetails.personalMap = personalDetails;
+    StudentDetails.codingMap = codingDetails;
+    StudentDetails.post = decRes["post"];
 
-  print("That separate PersonalDetail : $personalDetails");
-  print("That separate codingDetails :$codingDetails");
+    print("That separate PersonalDetail : ${StudentDetails.personalMap}");
+    print("That separate codingDetails :${StudentDetails.codingMap}");
+  }
+  catch(e) {
+    print("Error : $e");
+  }
 
   return decRes;
 }

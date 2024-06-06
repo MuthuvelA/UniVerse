@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:universe/component/model/credentials.dart';
+import 'package:universe/component/model/student_details.dart';
 import 'package:universe/component/view/student_personal_details_form_view.dart';
 import 'package:universe/component/view/student_profile.dart';
 
@@ -11,6 +13,8 @@ class StudentDashboardView extends StatefulWidget {
 }
 
 class _StudentDashboardViewState extends State<StudentDashboardView> {
+  String name = StudentDetails.personalMap["name"];
+  String email = StudentDetails.personalMap["emailAddress"];
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -29,7 +33,7 @@ class _StudentDashboardViewState extends State<StudentDashboardView> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          const DrawerHeader(
+           DrawerHeader(
               decoration: BoxDecoration(
                   color: Color(0xFF27397A)
               ),
@@ -37,8 +41,8 @@ class _StudentDashboardViewState extends State<StudentDashboardView> {
                 decoration: BoxDecoration(
                     color: Color(0xFF27397A)
                 ),
-                accountName: Text("Gopinath S", style: TextStyle(fontFamily: "Raleway",fontSize: 17),),
-                accountEmail: Text("gopinath.s2022cce@sece.ac.in", style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 14),),
+                accountName: Text("$name", style: TextStyle(fontFamily: "Raleway",fontSize: 17),),
+                accountEmail: Text("$email", style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 14),),
                 currentAccountPicture: CircleAvatar(
                   backgroundImage: AssetImage("assets/image/drawerLogo.png"),
                 ),
@@ -147,7 +151,7 @@ class _StudentDashboardViewState extends State<StudentDashboardView> {
             const Padding(padding: EdgeInsets.only(top: 20)),
             Text(" April 15, 2024",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 14,color: Colors.grey.shade400),),
             Padding(padding: EdgeInsets.only(top: height/20)),
-            const Text("Welcome Back, Gopinath!",style: TextStyle(fontFamily: "Raleway",fontSize: 18,color: Colors.white),),
+            Text("Welcome Back, $name!",style: TextStyle(fontFamily: "Raleway",fontSize: 18,color: Colors.white),),
             const Padding(padding: EdgeInsets.only(top: 3)),
             Text("Always Stay Updated :)",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 14,color: Colors.grey.shade400),),
             const Padding(padding: EdgeInsets.only(top: 20))
