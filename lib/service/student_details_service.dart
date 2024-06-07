@@ -98,3 +98,34 @@ Future<bool> getStudentDetails() async{
   }
   return false;
 }
+
+Future<bool> getLeaderboard() async{
+  StudentDetails.leetcodeLeaderboard = [];
+    StudentDetails.codeforcesLeaderboard = [];
+    StudentDetails.codechefLeaderboard = [];
+  var reqBody = {
+    "value" : StudentDetailsReport.finalReport,
+    "username" : userCredentials.get_user(),
+    "type" : userCredentials.get_user_type()
+  };
+  print(reqBody);
+  var response = await http.post(
+    Uri.parse(userCredentials.IP+"/leaderBoard"),
+    headers: {"content-Type": "application/json"},
+    body: jsonEncode(reqBody),
+  );
+  var decodeResponse = jsonDecode(response.body);
+  List<dynamic> leetcodeLeaderboard;
+  List<dynamic> codechefLeaderboard;
+  List<dynamic> codeforcesLeaderboard;
+  if (decodeResponse["status"]) {
+    leetcodeLeaderboard = List<dynamic>.from(decodeResponse["leetcode"]);
+    codechefLeaderboard = List<dynamic>.from(decodeResponse["codechef"]);
+    codeforcesLeaderboard = List<dynamic>.from(decodeResponse["codeforces"]);
+    StudentDetails.leetcodeLeaderboard = leetcodeLeaderboard;
+    StudentDetails.codeforcesLeaderboard = codeforcesLeaderboard;
+    StudentDetails.codechefLeaderboard = codechefLeaderboard;
+    return true;
+  }
+  return false;
+}
