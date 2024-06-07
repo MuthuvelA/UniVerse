@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:universe/component/view/admin_dashboard_view.dart';
 import 'package:universe/component/view/login_view.dart';
 import 'package:universe/component/view/staff_dashboard_view.dart';
 import 'package:universe/component/view/staff_profile_view.dart';
 import 'package:universe/component/view/student_dashboard_view.dart';
+import 'package:universe/component/view/student_personal_details_form_view.dart';
 import 'package:universe/component/view/student_profile.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -22,10 +25,12 @@ class MyApp extends StatelessWidget {
       initialRoute: "/login",
       routes: {
         "/login" : (context) =>  const LoginView(),
+        "/dummy" : (context) => const StudentDetailsFormView(),
         "/staffDash" : (context) => const StaffDashboardView(),
         "/studentDash" : (context) => const StudentDashboardView(post:[]),
         "/studentProfile" : (context) => const UserProfile(),
-        "/staffProfile" : (context) => const StaffProfileView()
+        "/staffProfile" : (context) => const StaffProfileView(),
+        "/adminDash" : (context) => const AdminDashboardView()
       },
     );
   }

@@ -10,7 +10,7 @@ class userCredentials{
   static final dynamic _key = dotenv.env['key'];
   static String IP = 'http://192.168.171.56:3002';
   
-  static void set_user(dynamic newuser){ 
+  static void set_user(dynamic newuser){
     _user = newuser;
   }
 

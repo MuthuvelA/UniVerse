@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:universe/component/utils/student_details.dart';
 import 'package:universe/component/utils/student_details_report.dart';
-import 'package:universe/service/student_deatils_update_service.dart';
-import 'package:universe/service/username_validation.dart';
+import 'package:universe/component/view/student_dashboard_view.dart';
+import 'package:universe/service/student_details_service.dart';
 
 class StudentCodingDetailsForm extends StatefulWidget {
-  StudentCodingDetailsForm({super.key, required this.personalDetailsController});
+  const StudentCodingDetailsForm({super.key, required this.personalDetailsController});
   final List<TextEditingController> personalDetailsController;
 
   @override
@@ -12,94 +13,111 @@ class StudentCodingDetailsForm extends StatefulWidget {
 }
 
 class _StudentCodingDetailsFormState extends State<StudentCodingDetailsForm> {
-  late List<bool> checkboxDetails;
-  bool isLeet = false;
-  bool isChef = false;
-  bool isForce = false;
+  TextEditingController leetcodeController = TextEditingController();
+  TextEditingController codechefController = TextEditingController();
+  TextEditingController codeforcesController = TextEditingController();
+  late List<bool> isEditable;
   bool isLoading = false;
-  List<String> codingDetails = [
-    "Leetcode Username",
-    "Codechef Username",
-    "CodeForces Username"
+  List<String> codingDetails = StudentDetails.getCodingDetails();
+  late List<TextEditingController> codingDetailsController = [
+    leetcodeController,
+    codechefController,
+    codeforcesController
   ];
+
   @override
-  void initState(){
+  void initState() {
+    isEditable = List<bool>.filled(codingDetails.length, false);
+    for (int i = 0; i < codingDetails.length; i++) {
+      codingDetailsController[i].text = codingDetails[i];
+    }
     super.initState();
-    checkboxDetails = List<bool>.filled(codingDetails.length, false);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Fill Your Coding Details",style: TextStyle(fontFamily: "Raleway",fontSize: 18),),
+        title: Text(
+          "Fill Your Coding Details",
+          style: TextStyle(fontFamily: "Raleway", fontSize: 18),
+        ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: bodyPartOfForm()),
+          scrollDirection: Axis.vertical, child: bodyPartOfForm()),
     );
   }
-  Widget bodyPartOfForm(){
-    TextEditingController leetcodeController = TextEditingController();
-    TextEditingController codechefController = TextEditingController();
-    TextEditingController codeforcesController = TextEditingController();
-    List<String> codingDetails = [
-      "Leetcode",
-      "Codechef",
-      "Codeforces"
-    ];
-    List<TextEditingController> codingDetailsController = [
-      leetcodeController,
-      codechefController,
-      codeforcesController
+
+  Widget bodyPartOfForm() {
+    List<String> codingDetailsLabels = [
+      "Leetcode Username",
+      "Codechef Username",
+      "CodeForces Username"
     ];
     StudentDetailsReport studentDetailsReport = StudentDetailsReport();
     return Padding(
-      padding: const EdgeInsets.only(top:30,left: 15,right: 15),
+      padding: const EdgeInsets.only(top: 30, left: 15, right: 15),
       child: Column(
         children: [
           Column(
-            children: List.generate(codingDetails.length, (index) {
-              return  Column(
+            children: List.generate(codingDetailsLabels.length, (index) {
+              return Column(
                 children: [
-                  Row(
+                  Stack(
                     children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 15),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(color: Colors.black,width: 1)
-                            ),
-                            child: TextFormField(
-
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 15),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(color: Colors.black, width: 1)),
+                                child: TextFormField(
+                                  enabled: isEditable[index],
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    hintText: codingDetailsLabels[index],
+                                    hintStyle: TextStyle(
+                                        fontFamily: "Raleway-SemiBold",
+                                        fontSize: 16,
+                                        color: Colors.grey),
+                                  ),
+                                  controller: codingDetailsController[index],
                                 ),
-                                hintText: codingDetails[index],
-                                hintStyle: const TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 16,color: Colors.grey),
                               ),
-                              controller: codingDetailsController[index],
                             ),
                           ),
-                        ),
+                          IconButton(
+                            icon: Icon(
+                              isEditable[index] ? Icons.check : Icons.edit,
+                              color: Colors.blue,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                isEditable[index] = !isEditable[index];
+                              });
+                            },
+                          ),
+                          MaterialButton(
+                            onPressed: () {
+
+                            },
+                            child: Text(
+                              "Validate",
+                              style: TextStyle(
+                                  fontFamily: "Raleway-SemiBold",
+                                  fontSize: 17,
+                                  color: Colors.white),
+                            ),
+                            color: Color(0xFF27397A),
+                          ),
+                        ],
                       ),
-                      MaterialButton(onPressed: (){
-                        setState(() async{
-                          bool result = await usernameValidation(codingDetailsController[index],codingDetails[index]);
-                          if(!result){
-                            showAlertDialog(context,"Username not found");
-                          }
-                          if(codingDetails[index]=="Leetcode") isLeet = result;
-                          else if(codingDetails[index]=="Codechef") isChef = result;
-                          else isForce = result;
-                        });
-                      },
-                        color: Color(0xFF27397A),
-                      child: const Text("Validate",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17,color: Colors.white),),
-                      )
                     ],
                   ),
                   const Padding(padding: EdgeInsets.only(top: 20))
@@ -109,17 +127,24 @@ class _StudentCodingDetailsFormState extends State<StudentCodingDetailsForm> {
           ),
           Center(
             child: MaterialButton(
-              onPressed: () async{
-                if((isLeet || leetcodeController.text.isEmpty) && (isChef || codechefController.text.isEmpty) && (isForce || codeforcesController.text.isEmpty)){
-                    studentDetailsReport.allAboutStudent(widget.personalDetailsController, codingDetailsController);
-                    await updateDetails();
-                }else{
-                  showAlertDialog(context,"please validate user first");
+              onPressed: () async {
+                studentDetailsReport.allAboutStudent(
+                    widget.personalDetailsController, codingDetailsController);
+                bool decider = await addStudentDetails();
+                bool detailsDecider = await getStudentDetails();
+                if (decider && detailsDecider) {
+                  Navigator.push(context, (MaterialPageRoute(builder: (context) =>  StudentDashboardView(post: StudentDetails.post))));
                 }
               },
-              color: const Color(0xFF27397A),
-              child: const Text("Submit",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 16,color: Colors.white),),
-            )
+              child: Text(
+                "Submit",
+                style: TextStyle(
+                    fontFamily: "Raleway-SemiBold",
+                    fontSize: 16,
+                    color: Colors.white),
+              ),
+              color: Color(0xFF27397A),
+            ),
           ),
           const Padding(padding: EdgeInsets.only(top: 15)),
         ],

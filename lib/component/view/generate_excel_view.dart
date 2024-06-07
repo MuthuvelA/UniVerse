@@ -68,7 +68,7 @@ class _GenetateExcelViewState extends State<GenetateExcelView> {
              decoration: BoxDecoration(
                borderRadius: BorderRadius.circular(10),
                border: Border.all(color: Colors.black),
-               color: Color(0xFF3F62E3)
+               color: const Color(0xFF27397A)
              ),
             child: Padding(
               padding: const EdgeInsets.only(left: 15,right: 15),
