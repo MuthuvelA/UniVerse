@@ -15,17 +15,68 @@ class StudentDashboardView extends StatefulWidget {
 class _StudentDashboardViewState extends State<StudentDashboardView> {
   String name = StudentDetails.personalMap["name"];
   String email = StudentDetails.personalMap["emailAddress"];
+  List<dynamic> notification = StudentDetails.notificationDetails;
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-        appBar: AppBar(title: const Text(""),),
+        appBar: AppBar(
+          // title: const Text("Student Dashboard"),
+          // centerTitle: true,
+          title: Row(
+            // crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              IconButton(
+                  onPressed: () {
+                    showNotification();
+                  }
+                  , icon: Icon(Icons.notifications)
+              ),
+            ]
+          ),
+        ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
             child: bodyPartOfDashboard(width,height)),
         drawer: drawerForStudent()
+    );
+  }
+
+  Future showNotification() {
+    return showMenu(
+        context: context,
+        position: RelativeRect.fromLTRB(100, 100, 0, 0),
+        items: [
+          PopupMenuItem(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 10,bottom: 10,left: 5,right: 5),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white
+                ),
+                color: Colors.white,
+                // Set the background color to white
+                child: Column(
+                  children: [
+                    Text(
+                        "There are ${notification.length} Notifications",
+                    ),
+                    SizedBox(height: 10,),
+                    Column(
+                      children: List.generate(notification.length, (index) {
+                        return Text("Your ${notification[index]["platform"]} platform  username : ${notification[index]["userName"]} is invalid");
+                      }),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ]
     );
   }
   Widget drawerForStudent() {

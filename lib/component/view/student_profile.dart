@@ -17,6 +17,10 @@ class _UserProfileState extends State<UserProfile> {
   bool bankDecider = false;
   bool referenceDecider = false;
   late List<bool> _selectedButtons;
+  double totalProblemSolved = StudentDetails.codingMap["leetcode"][1]["leetcodeTotal"];
+  int leetcodeEasy = StudentDetails.codingMap["leetcode"][1]["leetcodeEasy"];
+  int leetcodeMedium = StudentDetails.codingMap["leetcode"][1]["leetcodeMedium"];
+  int leetcodeHard = StudentDetails.codingMap["leetcode"][1]["leetcodeHard"];
 
   @override
   void initState() {
@@ -471,13 +475,27 @@ class _UserProfileState extends State<UserProfile> {
                   ],
                 ),
 
-                SizedBox(
-                  width: width/5,
-                  height: width/5,
-                  child: const CircularProgressIndicator(
-                    color: Colors.white,
-                    value: 1,
-                  ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: width/5,
+                      height: width/5,
+                      child: CircularProgressIndicator(
+                        backgroundColor: Colors.white,
+                        color: Colors.orange,
+                        value: totalProblemSolved/3173,
+                      ),
+                    ),
+                    SizedBox(height: 10,),
+                    Text(
+                      "${leetcodeEasy+leetcodeMedium+leetcodeHard} / 3173",
+                      style: TextStyle(
+                          fontFamily: "Raleway-SemiBold"
+                          ,color: Colors.white
+                      )
+                    )
+                  ],
                 ),
               ],
             ),
