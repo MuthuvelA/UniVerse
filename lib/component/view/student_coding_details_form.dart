@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:universe/component/utils/credentials.dart';
 import 'package:universe/component/utils/student_details.dart';
 import 'package:universe/component/utils/student_details_report.dart';
 import 'package:universe/component/view/student_dashboard_view.dart';
@@ -14,6 +15,10 @@ class StudentCodingDetailsForm extends StatefulWidget {
 }
 
 class _StudentCodingDetailsFormState extends State<StudentCodingDetailsForm> {
+  String prevValue = "";
+  String prevCodechef = "";
+  String prevCodeforces = "";
+
   TextEditingController leetcodeController = TextEditingController();
   TextEditingController codechefController = TextEditingController();
   TextEditingController codeforcesController = TextEditingController();
@@ -58,6 +63,11 @@ class _StudentCodingDetailsFormState extends State<StudentCodingDetailsForm> {
       "Codechef",
       "Codeforces"
     ];
+    List<String> prevValue = [
+      StudentDetails.personalMap["leetcode"],
+      StudentDetails.personalMap["codechef"],
+      StudentDetails.personalMap["codeforces"]
+    ];
     StudentDetailsReport studentDetailsReport = StudentDetailsReport();
     return Padding(
       padding: const EdgeInsets.only(top: 30, left: 15, right: 15),
@@ -85,7 +95,7 @@ class _StudentCodingDetailsFormState extends State<StudentCodingDetailsForm> {
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     hintText: codingDetailsLabels[index],
-                                    hintStyle: TextStyle(
+                                    hintStyle: const TextStyle(
                                         fontFamily: "Raleway-SemiBold",
                                         fontSize: 16,
                                         color: Colors.grey),
@@ -103,24 +113,34 @@ class _StudentCodingDetailsFormState extends State<StudentCodingDetailsForm> {
                             onPressed: () {
                               setState(() {
                                 isEditable[index] = !isEditable[index];
+                                if(isEditable[index]==false){
+                                  if(prevValue[index]==codingDetailsController[index].text){
+                                    codingDetailsValidation[index] = true;
+                                  }else {
+                                    codingDetailsValidation[index] = false;
+                                  }
+                                }else {
+                                  codingDetailsValidation[index] = false;
+                                }
                               });
                             },
                           ),
                           MaterialButton(
                             onPressed: () async {
+                              isEditable[index] = false;
                               bool decider = await usernameValidation(codingDetailsController[index],codingDetailsLabels[index]);
                               setState(() {
                                 codingDetailsValidation[index] = decider;
                               });
                             },
-                            child: Text(
+                            color: codingDetailsValidation[index] ? Color(0xFF27397A) : Colors.red,
+                            child: const Text(
                               "Validate",
                               style: TextStyle(
                                   fontFamily: "Raleway-SemiBold",
                                   fontSize: 17,
                                   color: Colors.white),
                             ),
-                            color: codingDetailsValidation[index] ? Color(0xFF27397A) : Colors.red,
                           ),
                         ],
                       ),
@@ -134,6 +154,8 @@ class _StudentCodingDetailsFormState extends State<StudentCodingDetailsForm> {
           Center(
             child: MaterialButton(
               onPressed: () async {
+
+                if(codingDetailsValidation[0] && codingDetailsValidation[1] && codingDetailsValidation[2]){                
                 studentDetailsReport.allAboutStudent(
                     widget.personalDetailsController, codingDetailsController);
                 bool decider = await addStudentDetails();
@@ -141,15 +163,18 @@ class _StudentCodingDetailsFormState extends State<StudentCodingDetailsForm> {
                 if (decider && detailsDecider) {
                   Navigator.push(context, (MaterialPageRoute(builder: (context) =>  StudentDashboardView(post: StudentDetails.post))));
                 }
+                }else{
+                  alert(context, "Please validate before submit");
+                }
               },
-              child: Text(
+              color: Color(0xFF27397A),
+              child: const Text(
                 "Submit",
                 style: TextStyle(
                     fontFamily: "Raleway-SemiBold",
                     fontSize: 16,
                     color: Colors.white),
               ),
-              color: Color(0xFF27397A),
             ),
           ),
           const Padding(padding: EdgeInsets.only(top: 15)),
@@ -159,30 +184,22 @@ class _StudentCodingDetailsFormState extends State<StudentCodingDetailsForm> {
   }
 }
 
-showAlertDialog(BuildContext context,String data) {
-
-  // set up the button
-  Widget okButton = TextButton(
-    child: Text("OK"),
-    onPressed: () { 
-      Navigator.pop(context);
-    },
-  );
-
-  // set up the AlertDialog
-  AlertDialog alert = AlertDialog(
-    title: Text("My title"),
-    content: Text(data),
-    actions: [
-      okButton,
-    ],
-  );
-
-  // show the dialog
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
+void alert(BuildContext context,String data) {
+  showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text('Alert'),
+          content: Text(data),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'Cancel'),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK'),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
 }
