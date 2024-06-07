@@ -94,7 +94,7 @@ class _StudentDetailsFormViewState extends State<StudentDetailsFormView> {
       "Phone Number",
       "Date of Birth",
       "Address",
-      "Parent Name",
+      "Father Name",
       "Mother Name",
       "Blood Group",
       "Aadhaar Card Number",
@@ -163,7 +163,7 @@ class _StudentDetailsFormViewState extends State<StudentDetailsFormView> {
                       ),
                     ],
                   ),
-                  Padding(padding: EdgeInsets.only(top: 20))
+                  const Padding(padding: EdgeInsets.only(top: 20))
                 ],
               );
             }),

@@ -1,12 +1,9 @@
-import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:universe/component/view/create_post_view.dart';
 import 'package:universe/component/view/generate_excel_view.dart';
 import 'package:universe/component/view/staff_profile_view.dart';
 import 'package:universe/component/view/student_details_view.dart';
-import 'package:universe/service/excel_download.dart';
 
 class StaffDashboardView extends StatefulWidget {
   const StaffDashboardView({super.key});

@@ -32,7 +32,7 @@ class _StudentDetailsViewState extends State<StudentDetailsView> {
       children: List.generate(len, (index) {
         return Column(
           children: [
-            Padding(padding: EdgeInsets.only(top: 20)),
+            const Padding(padding: EdgeInsets.only(top: 20)),
             GestureDetector(
               onTap: () {
                 Navigator.push(context, (MaterialPageRoute(builder: (context) => const UserProfile())));
@@ -42,7 +42,7 @@ class _StudentDetailsViewState extends State<StudentDetailsView> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.black,width: 1),
-                    color: Color(0xFF27397A)
+                    color: const Color(0xFF27397A)
                 ),
                 child: Padding(
                   padding: EdgeInsets.only(left: 10,right: 10),

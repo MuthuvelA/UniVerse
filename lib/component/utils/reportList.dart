@@ -1,4 +1,3 @@
-
 class ReportList{
   List<String> studentDetails = [
     "emailAddress",
