@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:universe/component/utils/credentials.dart';
 import 'package:universe/component/utils/student_details.dart';
+import 'package:universe/component/view/student_leaderboard_view.dart';
 import 'package:universe/component/view/student_personal_details_form_view.dart';
 import 'package:universe/component/view/student_profile.dart';
+import 'package:universe/service/student_details_service.dart';
 
 class StudentDashboardView extends StatefulWidget {
   final List<dynamic>post;
@@ -107,13 +109,6 @@ class _StudentDashboardViewState extends State<StudentDashboardView> {
             },
           ),
           ListTile(
-            leading: Icon(Icons.school_outlined),
-            title: Text("Department",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17),),
-            onTap: () {
-
-            },
-          ),
-          ListTile(
             leading: Icon(Icons.post_add_outlined),
             title: Text("Registration",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17),),
             onTap: () {
@@ -122,9 +117,10 @@ class _StudentDashboardViewState extends State<StudentDashboardView> {
           ),
           ListTile(
             leading: Icon(Icons.leaderboard),
-            title: Text("Performance",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17),),
-            onTap: () {
-
+            title: Text("Leaderboard",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17),),
+            onTap: () async{
+              await getLeaderboard();
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const StudentLeaderboard()));
             },
           ),
         ],
