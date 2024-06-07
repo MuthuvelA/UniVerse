@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:universe/component/utils/student_details.dart';
 import 'package:universe/component/utils/student_details_report.dart';
@@ -121,7 +120,7 @@ class _StudentCodingDetailsFormState extends State<StudentCodingDetailsForm> {
                       ),
                     ],
                   ),
-                  Padding(padding: EdgeInsets.only(top: 20))
+                  const Padding(padding: EdgeInsets.only(top: 20))
                 ],
               );
             }),
@@ -147,9 +146,37 @@ class _StudentCodingDetailsFormState extends State<StudentCodingDetailsForm> {
               color: Color(0xFF27397A),
             ),
           ),
-          Padding(padding: EdgeInsets.only(top: 15)),
+          const Padding(padding: EdgeInsets.only(top: 15)),
         ],
       ),
     );
   }
+}
+
+showAlertDialog(BuildContext context,String data) {
+
+  // set up the button
+  Widget okButton = TextButton(
+    child: Text("OK"),
+    onPressed: () { 
+      Navigator.pop(context);
+    },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("My title"),
+    content: Text(data),
+    actions: [
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

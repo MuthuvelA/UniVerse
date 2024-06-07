@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:universe/service/post_service.dart';
 
 class CreatePostView extends StatefulWidget {
   const CreatePostView({super.key});
@@ -63,7 +64,7 @@ class _CreatePostViewState extends State<CreatePostView> {
             child: TextFormField(
               decoration: InputDecoration(
                 hintText: "Enter the title...",
-                hintStyle: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 16,color: Colors.grey),
+                hintStyle: const TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 16,color: Colors.grey),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 )
@@ -71,7 +72,7 @@ class _CreatePostViewState extends State<CreatePostView> {
                controller: tittleController,
             ),
           ),
-          Padding(padding: EdgeInsets.only(top: 10)),
+          const Padding(padding: EdgeInsets.only(top: 10)),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -80,7 +81,7 @@ class _CreatePostViewState extends State<CreatePostView> {
             child: TextFormField(
               decoration: InputDecoration(
                 hintText: "Create a post for a student",
-                hintStyle: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 16,color: Colors.grey),
+                hintStyle: const TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 16,color: Colors.grey),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 )
