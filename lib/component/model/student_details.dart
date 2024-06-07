@@ -5,7 +5,6 @@ class StudentDetails {
   static List<String> codingDetails = [];
   static List<dynamic> post = [];
   static List<String> getPersonalDetails() {
-    int i=0;
     personalMap.forEach((key, value) {
       if (key != "__v" && key != "_id" && key != "leetcode" && key != "codechef" && key != "currentYear" && key != "codeforces" && key != "parentName") {
         if (value != "" && value != null) {
