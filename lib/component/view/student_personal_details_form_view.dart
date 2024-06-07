@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:universe/component/model/student_details.dart';
+import 'package:universe/component/utils/student_details.dart';
 import 'package:universe/component/view/student_coding_details_form.dart';
 
 class StudentDetailsFormView extends StatefulWidget {

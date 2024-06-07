@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:html';
 import 'package:http/http.dart' as http;
-import 'package:universe/component/model/credentials.dart';
-import 'package:universe/component/model/student_details.dart';
-import 'package:universe/component/model/student_details_report.dart';
+import 'package:universe/component/utils/credentials.dart';
+import 'package:universe/component/utils/student_details.dart';
+import 'package:universe/component/utils/student_details_report.dart';
 Future<bool> addStudentDetails() async {
   var reqBody = {
     "value" : StudentDetailsReport.finalReport,

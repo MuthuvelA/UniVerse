@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:universe/component/model/student_details.dart';
+import 'package:universe/component/utils/student_details.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({super.key});

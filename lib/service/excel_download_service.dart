@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:universe/component/model/credentials.dart';
-import 'package:universe/component/model/reportList.dart';
+import 'package:universe/component/utils/credentials.dart';
+import 'package:universe/component/utils/reportList.dart';
 
 Future<dynamic> generate() async {
   var reqBody = {

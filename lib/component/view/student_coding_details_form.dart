@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:universe/component/model/student_details.dart';
-import 'package:universe/component/model/student_details_report.dart';
+import 'package:universe/component/utils/student_details.dart';
+import 'package:universe/component/utils/student_details_report.dart';
 import 'package:universe/component/view/student_dashboard_view.dart';
 import 'package:universe/service/student_details_service.dart';
 

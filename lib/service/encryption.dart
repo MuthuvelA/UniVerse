@@ -1,5 +1,5 @@
 import 'package:encrypt/encrypt.dart';
-import 'package:universe/component/model/credentials.dart';
+import 'package:universe/component/utils/credentials.dart';
 
 String encryptData(String data) {
   final keyString = userCredentials.get_key();

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:universe/component/model/credentials.dart';
-import 'package:universe/component/model/student_details.dart';
+import 'package:universe/component/utils/credentials.dart';
+import 'package:universe/component/utils/student_details.dart';
 Future<dynamic> validateLogin() async {
   var reqBody = {
     "username": userCredentials.get_user(),
