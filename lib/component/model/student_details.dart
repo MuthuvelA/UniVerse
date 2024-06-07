@@ -8,7 +8,7 @@ class StudentDetails {
     int i=0;
     personalMap.forEach((key, value) {
       if (key != "__v" && key != "_id" && key != "leetcode" && key != "codechef" && key != "currentYear" && key != "codeforces" && key != "parentName") {
-        if (value == "") {
+        if (value != "" && value != null) {
           personalDetails.add(value);
           print("Iam from not null");
         }

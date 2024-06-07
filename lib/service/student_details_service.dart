@@ -66,29 +66,33 @@ Future<bool> getStudentDetails() async{
     print("flag 3");
     Map<String, dynamic> codingDetails = {};
     Map<String, dynamic> personalDetails = {};
-    print("Flag 1");
-    List<dynamic> codingDetailsFromBackend = userDetails["codingDetails"];
-    for (int i = 0; i < codingDetailsFromBackend.length; i++) {
-      codingDetails[codingDetailsFromBackend[i]["platform"]] = [
-        codingDetailsFromBackend[i]["contest"],
-        codingDetailsFromBackend[i]["problemSolved"]
-      ];
-    }
-    userDetails.forEach((key, value) {
-      if (key != "codingDetails") {
-        personalDetails[key] = value;
+    print("Flag 1"try{
+      List<dynamic> codingDetailsFromBackend = userDetails["codingDetails"];
+      for (int i = 0; i < codingDetailsFromBackend.length; i++) {
+        codingDetails[codingDetailsFromBackend[i]["platform"]] = [
+          codingDetailsFromBackend[i]["contest"],
+          codingDetailsFromBackend[i]["problemSolved"]
+        ];
       }
-    });
-    StudentDetails.personalMap = {};
-    StudentDetails.codingMap = {};
-    StudentDetails.personalMap = personalDetails;
-    StudentDetails.personalDetails = [];
-    StudentDetails.codingDetails = [];
-    StudentDetails.codingMap = codingDetails;
-    StudentDetails.post = decodeResponse["post"];
+      userDetails.forEach((key, value) {
+        if (key != "codingDetails") {
+          personalDetails[key] = value;
+        }
+      });
+      StudentDetails.personalMap = {};
+      StudentDetails.codingMap = {};
+      StudentDetails.personalMap = personalDetails;
+      StudentDetails.personalDetails = [];
+      StudentDetails.codingDetails = [];
+      StudentDetails.codingMap = codingDetails;
+      StudentDetails.post = decodeResponse["post"];
 
-    print("That separate PersonalDetail : ${StudentDetails.personalMap}");
-    print("That separate codingDetails :${StudentDetails.codingMap}");
+      print("That separate PersonalDetail : ${StudentDetails.personalMap}");
+      print("That separate codingDetails :${StudentDetails.codingMap}");
+    }
+    catch (e) {
+      print("Error : $e");
+    }
     return true;
   }
   return false;
