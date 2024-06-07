@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:universe/component/utils/credentials.dart';
 import 'package:universe/component/utils/student_details.dart';
+import 'package:universe/component/view/login_view.dart';
 import 'package:universe/component/view/student_leaderboard_view.dart';
 import 'package:universe/component/view/student_personal_details_form_view.dart';
 import 'package:universe/component/view/student_profile.dart';
@@ -19,6 +20,7 @@ class _StudentDashboardViewState extends State<StudentDashboardView> {
   String name = StudentDetails.personalMap["name"];
   String email = StudentDetails.personalMap["emailAddress"];
   List<dynamic> notification = StudentDetails.notificationDetails;
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -34,7 +36,7 @@ class _StudentDashboardViewState extends State<StudentDashboardView> {
             children: [
               IconButton(
                   onPressed: () {
-                    showNotification();
+                    showNotification(context);
                   }
                   , icon: Icon(Icons.notifications)
               ),
@@ -48,38 +50,36 @@ class _StudentDashboardViewState extends State<StudentDashboardView> {
     );
   }
 
-  Future showNotification() {
-    return showMenu(
-        context: context,
-        position: RelativeRect.fromLTRB(100, 100, 0, 0),
-        items: [
-          PopupMenuItem(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 10,bottom: 10,left: 5,right: 5),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white
-                ),
-                color: Colors.white,
-                // Set the background color to white
-                child: Column(
-                  children: [
-                    Text(
-                        "There are ${notification.length} Notifications",
-                    ),
-                    SizedBox(height: 10,),
-                    Column(
-                      children: List.generate(notification.length, (index) {
-                        return Text("Your ${notification[index]["platform"]} platform  username : ${notification[index]["userName"]} is invalid");
-                      }),
-                    )
-                  ],
-                ),
+  void showNotification(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                "There are ${notification.length} Notifications",
+                style: TextStyle(fontFamily: "Raleway", fontSize: 16),
               ),
-            ),
+              const SizedBox(height: 10),
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: notification.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(
+                      "Invalid Username in ${notification[index]["platform"]} platform  ${notification[index]["userName"]}",
+                      style: TextStyle(fontFamily: "Raleway-SemiBold", fontSize: 16),
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
-        ]
+        );
+      },
     );
   }
   Widget drawerForStudent() {
@@ -124,6 +124,13 @@ class _StudentDashboardViewState extends State<StudentDashboardView> {
               Navigator.push(context, MaterialPageRoute(builder: (context) => const StudentLeaderboard()));
             },
           ),
+          ListTile(
+            leading: Icon(Icons.logout),
+            title: Text("Logout", style: TextStyle(fontFamily: "Raleway-SemiBold", fontSize: 17),),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginView()));
+            },
+          ),
         ],
       ),
     );
@@ -148,7 +155,7 @@ class _StudentDashboardViewState extends State<StudentDashboardView> {
       children: List.generate(widget.post.length, (index) {
         return GestureDetector(
           onTap: () {
-            launchUrl(widget.post[index]["link"]);
+            _launchURL(widget.post[index]["link"]);
           },
           child: Padding(
             padding: const EdgeInsets.only(left: 10,right: 10),
