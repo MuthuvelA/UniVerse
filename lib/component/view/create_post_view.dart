@@ -7,18 +7,9 @@ class CreatePostView extends StatefulWidget {
 
   @override
   State<CreatePostView> createState() => _CreatePostViewState();
-
 }
 
 class _CreatePostViewState extends State<CreatePostView> {
-  // late QuillController _controller;
-  // late QuillToolbar _toolbar;
-  // @override
-  // void initState(){
-  //   super.initState();
-  //   _controller = QuillController.basic();
-  //   _toolbar = QuillToolbar.bas
-  // }
   List<String> personalizedCheckbox = [
     "CCE",
     "CSE",
@@ -28,6 +19,7 @@ class _CreatePostViewState extends State<CreatePostView> {
     "student",
     "staff"
   ];
+  DateTime _selectedDate = DateTime.now();
   List<String> title = [
     "Hackathon",
     "Internship",
@@ -35,170 +27,214 @@ class _CreatePostViewState extends State<CreatePostView> {
     "Others"
   ];
   String selectedValue = "";
-  Map<String,dynamic> finalReport = {};
+  Map<String, dynamic> finalReport = {};
   List<String> finalPersonalizedList = [];
   late List<bool> checkboxController;
+  TextEditingController createPostController = TextEditingController();
+  TextEditingController linkController = TextEditingController();
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     checkboxController = List.filled(personalizedCheckbox.length, false);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Create Post",style: TextStyle(fontFamily: "Raleway",fontSize: 18),),
+        title: const Text(
+          "CREATE POST",
+          style: TextStyle(fontFamily: "Raleway", fontSize: 18),
+        ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-          child: bodyPartForPost()),
+        child: bodyPartForPost(),
+      ),
     );
   }
-  Widget bodyPartForPost(){
-    TextEditingController createPostController = TextEditingController();
-    TextEditingController linkController = TextEditingController();
+
+  Widget bodyPartForPost() {
     return Padding(
-      padding: const EdgeInsets.only(left: 15,right: 15),
+      padding: const EdgeInsets.only(left: 15, right: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Container(
-          //   decoration: BoxDecoration(
-          //     borderRadius: BorderRadius.circular(10),
-          //     border: Border.all(color: Colors.black)
-          //   ),
-          //   child: TextFormField(
-          //     decoration: InputDecoration(
-          //       hintText: "Enter the title...",
-          //       hintStyle: const TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 16,color: Colors.grey),
-          //       border: OutlineInputBorder(
-          //         borderRadius: BorderRadius.circular(10),
-          //       )
-          //     ),
-          //      controller: tittleController,
-          //   ),
-          // ),
-          Row(
-            children: [
-              Text(
-                  "Select a Title :  ",
-                style: TextStyle(
-                  fontFamily: "Raleway-SemiBold",
-                  fontSize: 16,
-                  color: Colors.black
+          const Text(
+            "Select a Title:",
+            style: TextStyle(
+              fontFamily: "Raleway-SemiBold",
+              fontSize: 16,
+              color: Colors.black,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Wrap(
+            spacing: 10.0,
+            runSpacing: 10.0,
+            children: List.generate(title.length, (index) {
+              return GestureDetector(
+                onTap: () {
+                  setState(() {
+                    selectedValue = title[index];
+                  });
+                },
+                child: Card(
+                  color: selectedValue == title[index] ? const Color(0xFF031149) : Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    side: BorderSide(
+                      color: selectedValue == title[index] ? const Color(0xFF031149) : Colors.grey,
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          title[index],
+                          style: TextStyle(
+                            fontFamily: "Raleway-SemiBold",
+                            fontSize: 16,
+                            color: selectedValue == title[index] ? Colors.white : Colors.black,
+                          ),
+                        ),
+                        Radio(
+                          value: title[index],
+                          groupValue: selectedValue,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedValue = value!;
+                            });
+                            print("Selected radio value: $selectedValue");
+                          },
+                          activeColor: Colors.white,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-              Column(
-                children: List.generate(title.length, (index) {
-                  return Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children :[
-                      Text(
-                        "${title[index]}",
-                      style: TextStyle(
-                        fontFamily: "Raleway-SemiBold",
-                        fontSize: 16,
-                        color: Colors.black
-                      ),
-                    ),
-                    Radio(
-                        value: title[index],
-                        groupValue: selectedValue,
-                        onChanged: (value) {
-                          setState(() {
-                            selectedValue = value!;
-                          });
-                          print("Selected radio value : $selectedValue");
-                        }
-                    ),
-                    ]
-                  );
-                }),
-              ),
-            ],
+              );
+            }),
           ),
           const Padding(padding: EdgeInsets.only(top: 10)),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.black)
+              border: Border.all(color: Colors.black),
             ),
             child: TextFormField(
               decoration: InputDecoration(
                 hintText: "Create a post for a student",
-                hintStyle: const TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 16,color: Colors.grey),
+                hintStyle: const TextStyle(
+                  fontFamily: "Raleway-SemiBold",
+                  fontSize: 16,
+                  color: Colors.grey,
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                )
+                ),
               ),
               maxLines: 10,
               controller: createPostController,
             ),
           ),
-          SizedBox(height: 20,),
+          const SizedBox(height: 20),
           Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.black)
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.black),
             ),
             child: TextFormField(
               decoration: InputDecoration(
-                  hintText: "Inset a Link here",
-                  hintStyle: const TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 16,color: Colors.grey),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  )
+                hintText: "Insert a Link here",
+                hintStyle: const TextStyle(
+                  fontFamily: "Raleway-SemiBold",
+                  fontSize: 16,
+                  color: Colors.grey,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
               controller: linkController,
             ),
           ),
-          Padding(padding: EdgeInsets.only(top: 15)),
-          // Text("Personalize Your Post",style: TextStyle(fontFamily: "Raleway",fontSize: 17),),
-          // Column(
-          //   children: List.generate(personalizedCheckbox.length, (index) {
-          //     return Row(
-          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //       children: [
-          //         Text("${personalizedCheckbox[index]}",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 16,color: Colors.black),),
-          //         Checkbox(
-          //           value: checkboxController[index],
-          //           onChanged: (value) {
-          //             setState(() {
-          //               checkboxController[index] = value!;
-          //               if(checkboxController[index]){
-          //                 finalPersonalizedList.add(personalizedCheckbox[index]);
-          //               }
-          //             });
-          //           },
-          //         ),
-          //       ],
-          //     );
-          //   }),
-          // ),
-
+          Row(
+            children: [
+              const Text(
+                "End date ",
+                style: TextStyle(
+                  fontFamily: "Raleway-SemiBold",
+                  fontSize: 16,
+                  color: Colors.black,
+                ),
+              ),
+              MaterialButton(
+                onPressed: () {
+                  _selectDate(context);
+                  print(_selectedDate.toString());
+                },
+                child: Text(
+                  "${_selectedDate.toLocal()}".split(' ')[0],
+                  style: const TextStyle(
+                    fontFamily: "Raleway-SemiBold",
+                    fontSize: 16,
+                    color: Colors.black,
+                  ),
+                ),
+              )
+            ],
+          ),
+          const Padding(padding: EdgeInsets.only(top: 15)),
           Center(
-            child: MaterialButton(onPressed: () async{
-              finalReport = {
-                "title" : selectedValue,
-                "post" : createPostController.text,
-              };
-              debugPrint("${finalReport}");
-              bool decider = await addPost(selectedValue,linkController,createPostController);
-              if (decider) {
-                Navigator.push(context, (MaterialPageRoute(builder: (context) => const StaffDashboardView())));
-              }
-              else {
-                print("Failed to post");
-              }
-            },
-              child: Text("Publish",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17,color: Colors.white),),
-              color: Colors.blue,
+            child: MaterialButton(
+              onPressed: () async {
+                finalReport = {
+                  "title": selectedValue,
+                  "post": createPostController.text,
+                };
+                debugPrint("$finalReport");
+                bool decider = await addPost(selectedValue, linkController, createPostController,_selectedDate.toString());
+                if (decider) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const StaffDashboardView()));
+                } else {
+                  print("Failed to post");
+                }
+              },
+              child: const Text(
+                "Publish",
+                style: TextStyle(
+                  fontFamily: "Raleway-SemiBold",
+                  fontSize: 17,
+                  color: Colors.white,
+                ),
+              ),
+              color: const Color(0xFF031149),
             ),
           )
         ],
       ),
     );
+  }
+
+  _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate,
+      firstDate: DateTime.now(), // Set the start date
+      lastDate: DateTime(2101), // Set the end date
+    );
+    if (picked != null && picked != _selectedDate) {
+      setState(() {
+        _selectedDate = picked;
+      });
+    }
   }
 }

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:universe/component/view/create_post_view.dart';
 import 'package:universe/component/view/generate_excel_view.dart';
+import 'package:universe/component/view/login_view.dart';
 import 'package:universe/component/view/staff_profile_view.dart';
 import 'package:universe/component/view/student_details_view.dart';
 
@@ -77,7 +78,14 @@ class _StaffDashboardViewState extends State<StaffDashboardView> {
             onTap: () {
               Navigator.push(context, (MaterialPageRoute(builder: (context) => const GenetateExcelView())));
             },
-          )
+          ),
+          ListTile(
+            leading: Icon(Icons.logout),
+            title: Text("Logout", style: TextStyle(fontFamily: "Raleway-SemiBold", fontSize: 17),),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginView()));
+            },
+          ),
         ],
       ),
     );

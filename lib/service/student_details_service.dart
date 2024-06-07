@@ -60,40 +60,39 @@ Future<bool> getStudentDetails() async{
     headers: {"content-Type": "application/json"},
     body: jsonEncode(reqBody),
   );
-  var decodeResponse = jsonDecode(response.body);
-  if (decodeResponse["status"]) {
-    Map<String, dynamic> userDetails = Map<String, dynamic>.from(decodeResponse["userDetails"]);
+  var decRes = jsonDecode(response.body);
+  if (decRes["status"]){
+    Map<String, dynamic> userDetails = Map<String, dynamic>.from(decRes["userDetails"]);
     print("flag 3");
     Map<String, dynamic> codingDetails = {};
     Map<String, dynamic> personalDetails = {};
     print("Flag 1");
-    try{
-      List<dynamic> codingDetailsFromBackend = userDetails["codingDetails"];
-      for (int i = 0; i < codingDetailsFromBackend.length; i++) {
-        codingDetails[codingDetailsFromBackend[i]["platform"]] = [
-          codingDetailsFromBackend[i]["contest"],
-          codingDetailsFromBackend[i]["problemSolved"]
-        ];
+    List<dynamic> codingDetailsFromBackend = userDetails["codingDetails"];
+    for (int i = 0; i < codingDetailsFromBackend.length; i++) {
+      codingDetails[codingDetailsFromBackend[i]["platform"]] = [
+        codingDetailsFromBackend[i]["contest"],
+        codingDetailsFromBackend[i]["problemSolved"]
+      ];
+    }
+    userDetails.forEach((key, value) {
+      if (key != "codingDetails") {
+        personalDetails[key] = value;
       }
-      userDetails.forEach((key, value) {
-        if (key != "codingDetails") {
-          personalDetails[key] = value;
-        }
-      });
-      StudentDetails.personalMap = {};
-      StudentDetails.codingMap = {};
-      StudentDetails.personalMap = personalDetails;
-      StudentDetails.personalDetails = [];
-      StudentDetails.codingDetails = [];
-      StudentDetails.codingMap = codingDetails;
-      StudentDetails.post = decodeResponse["post"];
+    });
+    // StudentDetails.codingDetails[0] = userDetails["leetcode"];
+    // StudentDetails.codingDetails[1] = userDetails["codechef"];
+    StudentDetails.personalDetails = [];
+    StudentDetails.codingDetails = [];
+    StudentDetails.personalMap = {};
+    StudentDetails.codingMap = {};
+    StudentDetails.notificationDetails = [];
+    StudentDetails.personalMap = personalDetails;
+    StudentDetails.codingMap = codingDetails;
+    StudentDetails.notificationDetails = personalDetails["invalidUserName"];
+    print("From Updation service : ${StudentDetails.notificationDetails}");
 
-      print("That separate PersonalDetail : ${StudentDetails.personalMap}");
-      print("That separate codingDetails :${StudentDetails.codingMap}");
-    }
-    catch (e) {
-      print("Error : $e");
-    }
+    print("That separate PersonalDetail : ${StudentDetails.personalMap}");
+    print("That separate codingDetails :${StudentDetails.codingMap}");
     return true;
   }
   return false;

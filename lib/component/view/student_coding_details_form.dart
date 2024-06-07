@@ -3,6 +3,7 @@ import 'package:universe/component/utils/student_details.dart';
 import 'package:universe/component/utils/student_details_report.dart';
 import 'package:universe/component/view/student_dashboard_view.dart';
 import 'package:universe/service/student_details_service.dart';
+import 'package:universe/service/username_validation.dart';
 
 class StudentCodingDetailsForm extends StatefulWidget {
   const StudentCodingDetailsForm({super.key, required this.personalDetailsController});
@@ -16,6 +17,7 @@ class _StudentCodingDetailsFormState extends State<StudentCodingDetailsForm> {
   TextEditingController leetcodeController = TextEditingController();
   TextEditingController codechefController = TextEditingController();
   TextEditingController codeforcesController = TextEditingController();
+  late List<bool> codingDetailsValidation;
   late List<bool> isEditable;
   bool isLoading = false;
   List<String> codingDetails = StudentDetails.getCodingDetails();
@@ -28,6 +30,7 @@ class _StudentCodingDetailsFormState extends State<StudentCodingDetailsForm> {
   @override
   void initState() {
     isEditable = List<bool>.filled(codingDetails.length, false);
+    codingDetailsValidation = List<bool>.filled(codingDetails.length,true);
     for (int i = 0; i < codingDetails.length; i++) {
       codingDetailsController[i].text = codingDetails[i];
     }
@@ -51,9 +54,9 @@ class _StudentCodingDetailsFormState extends State<StudentCodingDetailsForm> {
 
   Widget bodyPartOfForm() {
     List<String> codingDetailsLabels = [
-      "Leetcode Username",
-      "Codechef Username",
-      "CodeForces Username"
+      "Leetcode",
+      "Codechef",
+      "Codeforces"
     ];
     StudentDetailsReport studentDetailsReport = StudentDetailsReport();
     return Padding(
@@ -104,8 +107,11 @@ class _StudentCodingDetailsFormState extends State<StudentCodingDetailsForm> {
                             },
                           ),
                           MaterialButton(
-                            onPressed: () {
-
+                            onPressed: () async {
+                              bool decider = await usernameValidation(codingDetailsController[index],codingDetailsLabels[index]);
+                              setState(() {
+                                codingDetailsValidation[index] = decider;
+                              });
                             },
                             child: Text(
                               "Validate",
@@ -114,7 +120,7 @@ class _StudentCodingDetailsFormState extends State<StudentCodingDetailsForm> {
                                   fontSize: 17,
                                   color: Colors.white),
                             ),
-                            color: Color(0xFF27397A),
+                            color: codingDetailsValidation[index] ? Color(0xFF27397A) : Colors.red,
                           ),
                         ],
                       ),

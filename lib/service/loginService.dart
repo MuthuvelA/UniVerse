@@ -20,32 +20,37 @@ Future<dynamic> validateLogin() async {
   var decRes = jsonDecode(response.body);
   print("Flag 2");
   try {
-    Map<String, dynamic> userDetails = Map<String, dynamic>.from(decRes["userDetails"]);
-    print("flag 3");
-    Map<String, dynamic> codingDetails = {};
-    Map<String, dynamic> personalDetails = {};
-    print("Flag 1");
-    List<dynamic> codingDetailsFromBackend = userDetails["codingDetails"];
-    for (int i = 0; i < codingDetailsFromBackend.length; i++) {
-      codingDetails[codingDetailsFromBackend[i]["platform"]] = [
-        codingDetailsFromBackend[i]["contest"],
-        codingDetailsFromBackend[i]["problemSolved"]
-      ];
-    }
-    userDetails.forEach((key, value) {
-      if (key != "codingDetails") {
-        personalDetails[key] = value;
+    if (decRes["status"]){
+      Map<String, dynamic> userDetails =
+          Map<String, dynamic>.from(decRes["userDetails"]);
+      print("flag 3");
+      Map<String, dynamic> codingDetails = {};
+      Map<String, dynamic> personalDetails = {};
+      print("Flag 1");
+      List<dynamic> codingDetailsFromBackend = userDetails["codingDetails"];
+      for (int i = 0; i < codingDetailsFromBackend.length; i++) {
+        codingDetails[codingDetailsFromBackend[i]["platform"]] = [
+          codingDetailsFromBackend[i]["contest"],
+          codingDetailsFromBackend[i]["problemSolved"]
+        ];
       }
-    });
-    // StudentDetails.codingDetails[0] = userDetails["leetcode"];
-    // StudentDetails.codingDetails[1] = userDetails["codechef"];
-    StudentDetails.personalMap = personalDetails;
-    StudentDetails.codingMap = codingDetails;
-    StudentDetails.post = decRes["post"];
-    StudentDetails.notificationDetails = personalDetails["invalidUserName"];
+      userDetails.forEach((key, value) {
+        if (key != "codingDetails") {
+          personalDetails[key] = value;
+        }
+      });
+      // StudentDetails.codingDetails[0] = userDetails["leetcode"];
+      // StudentDetails.codingDetails[1] = userDetails["codechef"];
+      StudentDetails.personalMap = personalDetails;
+      StudentDetails.codingMap = codingDetails;
+      StudentDetails.post = decRes["post"];
+      StudentDetails.notificationDetails = personalDetails["invalidUserName"];
+      print("From Login service : ${StudentDetails.notificationDetails}");
 
-    print("That separate PersonalDetail : ${StudentDetails.personalMap}");
-    print("That separate codingDetails :${StudentDetails.codingMap}");
+      print("That separate PersonalDetail : ${StudentDetails.personalMap}");
+      print("That separate codingDetails :${StudentDetails.codingMap}");
+      return decRes;
+    }
   }
   catch(e) {
     print("Error : $e");

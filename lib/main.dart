@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:universe/component/view/admin_dashboard_view.dart';
+import 'package:universe/component/view/create_post_view.dart';
 import 'package:universe/component/view/login_view.dart';
 import 'package:universe/component/view/staff_dashboard_view.dart';
 import 'package:universe/component/view/staff_profile_view.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       initialRoute: "/login",
       routes: {
         "/login" : (context) =>  const LoginView(),
-        "/dummy" : (context) => const StudentDetailsFormView(),
+        "/dummy" : (context) => const CreatePostView(),
         "/staffDash" : (context) => const StaffDashboardView(),
         "/studentDash" : (context) => const StudentDashboardView(post:[]),
         "/studentProfile" : (context) => const UserProfile(),
