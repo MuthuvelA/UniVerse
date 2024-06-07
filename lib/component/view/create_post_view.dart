@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:universe/component/view/staff_dashboard_view.dart';
 import 'package:universe/service/post_service.dart';
 
 class CreatePostView extends StatefulWidget {
@@ -27,6 +28,13 @@ class _CreatePostViewState extends State<CreatePostView> {
     "student",
     "staff"
   ];
+  List<String> title = [
+    "Hackathon",
+    "Internship",
+    "Contest",
+    "Others"
+  ];
+  String selectedValue = "";
   Map<String,dynamic> finalReport = {};
   List<String> finalPersonalizedList = [];
   late List<bool> checkboxController;
@@ -50,27 +58,66 @@ class _CreatePostViewState extends State<CreatePostView> {
   }
   Widget bodyPartForPost(){
     TextEditingController createPostController = TextEditingController();
-    TextEditingController tittleController = TextEditingController();
+    TextEditingController linkController = TextEditingController();
     return Padding(
       padding: const EdgeInsets.only(left: 15,right: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.black)
-            ),
-            child: TextFormField(
-              decoration: InputDecoration(
-                hintText: "Enter the title...",
-                hintStyle: const TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 16,color: Colors.grey),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                )
+          // Container(
+          //   decoration: BoxDecoration(
+          //     borderRadius: BorderRadius.circular(10),
+          //     border: Border.all(color: Colors.black)
+          //   ),
+          //   child: TextFormField(
+          //     decoration: InputDecoration(
+          //       hintText: "Enter the title...",
+          //       hintStyle: const TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 16,color: Colors.grey),
+          //       border: OutlineInputBorder(
+          //         borderRadius: BorderRadius.circular(10),
+          //       )
+          //     ),
+          //      controller: tittleController,
+          //   ),
+          // ),
+          Row(
+            children: [
+              Text(
+                  "Select a Title :  ",
+                style: TextStyle(
+                  fontFamily: "Raleway-SemiBold",
+                  fontSize: 16,
+                  color: Colors.black
+                ),
               ),
-               controller: tittleController,
-            ),
+              Column(
+                children: List.generate(title.length, (index) {
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children :[
+                      Text(
+                        "${title[index]}",
+                      style: TextStyle(
+                        fontFamily: "Raleway-SemiBold",
+                        fontSize: 16,
+                        color: Colors.black
+                      ),
+                    ),
+                    Radio(
+                        value: title[index],
+                        groupValue: selectedValue,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedValue = value!;
+                          });
+                          print("Selected radio value : $selectedValue");
+                        }
+                    ),
+                    ]
+                  );
+                }),
+              ),
+            ],
           ),
           const Padding(padding: EdgeInsets.only(top: 10)),
           Container(
@@ -90,38 +137,61 @@ class _CreatePostViewState extends State<CreatePostView> {
               controller: createPostController,
             ),
           ),
-          Padding(padding: EdgeInsets.only(top: 15)),
-          Text("Personalize Your Post",style: TextStyle(fontFamily: "Raleway",fontSize: 17),),
-          Column(
-            children: List.generate(personalizedCheckbox.length, (index) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("${personalizedCheckbox[index]}",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 16,color: Colors.black),),
-                  Checkbox(
-                    value: checkboxController[index],
-                    onChanged: (value) {
-                      setState(() {
-                        checkboxController[index] = value!;
-                        if(checkboxController[index]){
-                          finalPersonalizedList.add(personalizedCheckbox[index]);
-                        }
-                      });
-                    },
-                  ),
-                ],
-              );
-            }),
+          SizedBox(height: 20,),
+          Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Colors.black)
+            ),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  hintText: "Inset a Link here",
+                  hintStyle: const TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 16,color: Colors.grey),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  )
+              ),
+              controller: linkController,
+            ),
           ),
+          Padding(padding: EdgeInsets.only(top: 15)),
+          // Text("Personalize Your Post",style: TextStyle(fontFamily: "Raleway",fontSize: 17),),
+          // Column(
+          //   children: List.generate(personalizedCheckbox.length, (index) {
+          //     return Row(
+          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //       children: [
+          //         Text("${personalizedCheckbox[index]}",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 16,color: Colors.black),),
+          //         Checkbox(
+          //           value: checkboxController[index],
+          //           onChanged: (value) {
+          //             setState(() {
+          //               checkboxController[index] = value!;
+          //               if(checkboxController[index]){
+          //                 finalPersonalizedList.add(personalizedCheckbox[index]);
+          //               }
+          //             });
+          //           },
+          //         ),
+          //       ],
+          //     );
+          //   }),
+          // ),
 
           Center(
-            child: MaterialButton(onPressed: (){
+            child: MaterialButton(onPressed: () async{
               finalReport = {
-                "title" : tittleController.text,
+                "title" : selectedValue,
                 "post" : createPostController.text,
-                "filter" : finalPersonalizedList
               };
               debugPrint("${finalReport}");
+              bool decider = await addPost(selectedValue,linkController,createPostController);
+              if (decider) {
+                Navigator.push(context, (MaterialPageRoute(builder: (context) => const StaffDashboardView())));
+              }
+              else {
+                print("Failed to post");
+              }
             },
               child: Text("Publish",style: TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 17,color: Colors.white),),
               color: Colors.blue,

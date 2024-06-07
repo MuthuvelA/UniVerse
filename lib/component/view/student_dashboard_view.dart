@@ -5,6 +5,7 @@ import 'package:universe/component/view/student_leaderboard_view.dart';
 import 'package:universe/component/view/student_personal_details_form_view.dart';
 import 'package:universe/component/view/student_profile.dart';
 import 'package:universe/service/student_details_service.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class StudentDashboardView extends StatefulWidget {
   final List<dynamic>post;
@@ -145,40 +146,52 @@ class _StudentDashboardViewState extends State<StudentDashboardView> {
   Widget quickRecap(){
     return Column(
       children: List.generate(widget.post.length, (index) {
-        return Padding(
-          padding: const EdgeInsets.only(left: 10,right: 10),
-          child: Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.black,width: 1),
-                    color: const Color(0xFF27397A)
-                ),
-                child: Column(
-                  children: [
-                    const Padding(padding: EdgeInsets.only(top: 20)),
-                    Center(
-                      child: Text(widget.post[index]["title"]!,style: TextStyle(fontFamily: "Raleway",fontSize: 17,color: Colors.white),),
-                    ),
-                    const Padding(padding: EdgeInsets.only(top: 20)),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10,right: 10),
-                      child: Text(widget.post[index]["content"]!,
-                        style: const TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 16,color: Colors.white),
+        return GestureDetector(
+          onTap: () {
+            launchUrl(widget.post[index]["link"]);
+          },
+          child: Padding(
+            padding: const EdgeInsets.only(left: 10,right: 10),
+            child: Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.black,width: 1),
+                      color: const Color(0xFF27397A)
+                  ),
+                  child: Column(
+                    children: [
+                      const Padding(padding: EdgeInsets.only(top: 20)),
+                      Center(
+                        child: Text(widget.post[index]["title"]!,style: TextStyle(fontFamily: "Raleway",fontSize: 17,color: Colors.white),),
                       ),
-                    ),
-                    const Padding(padding: EdgeInsets.only(top: 20)),
-                    widget.post[index]["postType"] != ' ' ? Text(widget.post[index]["postType"]!,style: const TextStyle(fontFamily: "Raleway",fontSize: 17,color: Colors.white),) : const Text("Admin",style: TextStyle(fontFamily: "Raleway",fontSize: 17,color: Colors.white)),
-                  ],
+                      const Padding(padding: EdgeInsets.only(top: 20)),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10,right: 10),
+                        child: Text(widget.post[index]["content"]!,
+                          style: const TextStyle(fontFamily: "Raleway-SemiBold",fontSize: 16,color: Colors.white),
+                        ),
+                      ),
+                      const Padding(padding: EdgeInsets.only(top: 20)),
+                      // widget.post[index]["postType"] != ' ' ? Text(widget.post[index]["postType"]!,style: const TextStyle(fontFamily: "Raleway",fontSize: 17,color: Colors.white),) : const Text("Admin",style: TextStyle(fontFamily: "Raleway",fontSize: 17,color: Colors.white)),
+                    ],
+                  ),
                 ),
-              ),
-              const Padding(padding: EdgeInsets.only(top: 20)),
-            ],
+                const Padding(padding: EdgeInsets.only(top: 20)),
+              ],
+            ),
           ),
         );
       }),
     );
+  }
+  Future _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
   Widget welcomeBackCard(double width, double height){
     DateTime now = new DateTime.now();
