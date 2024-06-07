@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
         "/staffProfile" : (context) => const StaffProfileView(),
         "/adminDash" : (context) => const AdminDashboardView()
       },
+      debugShowCheckedModeBanner: false,
     );
   }
 }

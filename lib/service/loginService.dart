@@ -42,6 +42,7 @@ Future<dynamic> validateLogin() async {
     StudentDetails.personalMap = personalDetails;
     StudentDetails.codingMap = codingDetails;
     StudentDetails.post = decRes["post"];
+    StudentDetails.notificationDetails = personalDetails["invalidUserName"];
 
     print("That separate PersonalDetail : ${StudentDetails.personalMap}");
     print("That separate codingDetails :${StudentDetails.codingMap}");

@@ -4,9 +4,10 @@ class StudentDetails {
   static List<String> personalDetails = [];
   static List<String> codingDetails = [];
   static List<dynamic> post = [];
+  static List<dynamic> notificationDetails = [];
   static List<String> getPersonalDetails() {
     personalMap.forEach((key, value) {
-      if (key != "__v" && key != "_id" && key != "leetcode" && key != "codechef" && key != "currentYear" && key != "codeforces" && key != "parentName") {
+      if (key != "__v" && key != "_id" && key != "leetcode" && key != "codechef" && key != "currentYear" && key != "codeforces" && key != "parentName" && key != "invalidUserName") {
         if (value != "" && value != null) {
           personalDetails.add(value);
           print("Iam from not null");
