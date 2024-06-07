@@ -9,7 +9,7 @@ class StudentLeaderboard extends StatefulWidget {
 }
 
 class _StudentLeaderboardState extends State<StudentLeaderboard> {
-  String selectedPlatform = "Leetcode";  // Default selected platform
+  String selectedPlatform = "Leetcode";
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +46,13 @@ class _StudentLeaderboardState extends State<StudentLeaderboard> {
                     selectedPlatform = "Leetcode";
                   });
                 },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                    (Set<MaterialState> states) {
+                      return selectedPlatform == "Leetcode" ? const Color.fromARGB(255, 156, 233, 159) : Colors.white;
+                    },
+                  ),
+                ),
                 child: const Text("Leetcode"),
               ),
               ElevatedButton(
@@ -54,6 +61,13 @@ class _StudentLeaderboardState extends State<StudentLeaderboard> {
                     selectedPlatform = "Codeforce";
                   });
                 },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                    (Set<MaterialState> states) {
+                      return selectedPlatform == "Codeforce" ? const Color.fromARGB(255, 156, 233, 159) : Colors.white;
+                    },
+                  ),
+                ),
                 child: const Text("Codeforce"),
               ),
               ElevatedButton(
@@ -62,16 +76,26 @@ class _StudentLeaderboardState extends State<StudentLeaderboard> {
                     selectedPlatform = "Codechef";
                   });
                 },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                    (Set<MaterialState> states) {
+                      return selectedPlatform == "Codechef" ? const Color.fromARGB(255, 156, 233, 159) : Colors.white;
+                    },
+                  ),
+                ),
                 child: const Text("Codechef"),
               ),
             ],
           ),
-          SizedBox(height: 20),  // Add some space between buttons and the content
+          
+          const SizedBox(height: 20),  // Add some space between buttons and the content
+
           Expanded(child: getSelectedPlatformWidget(width,height)),
         ],
       ),
     );
   }
+
 
   Widget getSelectedPlatformWidget(double width,double height) {
     switch (selectedPlatform) {
@@ -87,71 +111,134 @@ class _StudentLeaderboardState extends State<StudentLeaderboard> {
   }
 
   Widget codechef_leaderboard(double width,double height) {
-    return Column(
-      children: [
-        Column(
-          children: List.generate(StudentDetails.codechefLeaderboard.length, (index) {
-            return Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10)
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("${StudentDetails.codechefLeaderboard[index]["username"]}"),
-                  Text("${StudentDetails.codechefLeaderboard[index]["rating"]}")
-              ],
-              ),
-            );
-          }),
-        )
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Column(
+            children: List.generate(StudentDetails.codechefLeaderboard.length, (index) {
+              return Padding(
+                padding: EdgeInsets.only(bottom: width/20),
+                child: Container(
+                    width: width,
+                    height: height/10,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(width/30),
+                      border: Border.all(color : Colors.black),
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color.fromARGB(255, 243, 238, 238).withOpacity(0.5),
+                          spreadRadius: 4.8,
+                          blurRadius: 7,
+                          offset: const Offset(0, 3), 
+                        ),
+                      ],
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(width/30),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CircleAvatar(),
+                          Text("${StudentDetails.codechefLeaderboard[index]["username"]}"),
+                          Text("${StudentDetails.codechefLeaderboard[index]["rating"]}")
+                      ],
+                      ),
+                    ),
+                  ),
+              );
+              },
+            )
+          ),
+        ],
+      ),
     );
   }
 
   Widget Leetcode_leaderboard(double width, double height) {
-    return Column(
-      children: [
-        Column(
-          children: List.generate(StudentDetails.leetcodeLeaderboard.length, (index) {
-            return Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10)
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("${StudentDetails.leetcodeLeaderboard[index]["username"]}"),
-                  Text("${StudentDetails.leetcodeLeaderboard[index]["rating"]}")
-              ],
-              ),
-            );
-          }),
-        )
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Column(
+            children: List.generate(StudentDetails.codechefLeaderboard.length, (index) {
+              return Padding(
+                padding: EdgeInsets.only(bottom: width/20),
+                child: Container(
+                    width: width,
+                    height: height/10,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(width/30),
+                      border: Border.all(color : Colors.black),
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color.fromARGB(255, 243, 238, 238).withOpacity(0.5),
+                          spreadRadius: 4.8,
+                          blurRadius: 7,
+                          offset: const Offset(0, 3), 
+                        ),
+                      ],
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(width/30),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CircleAvatar(),
+                          Text("${StudentDetails.leetcodeLeaderboard[index]["username"]}"),
+                          Text("${StudentDetails.leetcodeLeaderboard[index]["rating"]}")
+                      ],
+                      ),
+                    ),
+                  ),
+              );
+              },
+            )
+          ),
+        ],
+      ),
     );
   }
 
   Widget codeforce_leaderboard(double width,double height) {
-    return Column(
-      children: [
-        Column(
-          children: List.generate(StudentDetails.codechefLeaderboard.length, (index) {
-            return Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10)
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("${StudentDetails.codeforcesLeaderboard[index]["username"]}"),
-                  Text("${StudentDetails.codeforcesLeaderboard[index]["rating"]}")
-              ],
-              ),
-            );
-          }),
-        )
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Column(
+            children: List.generate(StudentDetails.codechefLeaderboard.length, (index) {
+              return Padding(
+                padding: EdgeInsets.only(bottom: width/20),
+                child: Container(
+                    width: width,
+                    height: height/10,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(width/30),
+                      border: Border.all(color : Colors.black),
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color.fromARGB(255, 243, 238, 238).withOpacity(0.5),
+                          spreadRadius: 4.8,
+                          blurRadius: 7,
+                          offset: const Offset(0, 3), 
+                        ),
+                      ],
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(width/30),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CircleAvatar(),
+                          Text("${StudentDetails.codeforcesLeaderboard[index]["username"]}"),
+                          Text("${StudentDetails.codeforcesLeaderboard[index]["rating"]}")
+                      ],
+                      ),
+                    ),
+                  ),
+              );
+              },
+            )
+          ),
+        ],
+      ),
     );
   }
 }
