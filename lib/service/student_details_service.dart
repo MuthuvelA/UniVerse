@@ -66,7 +66,8 @@ Future<bool> getStudentDetails() async{
     print("flag 3");
     Map<String, dynamic> codingDetails = {};
     Map<String, dynamic> personalDetails = {};
-    print("Flag 1"try{
+    print("Flag 1");
+    try{
       List<dynamic> codingDetailsFromBackend = userDetails["codingDetails"];
       for (int i = 0; i < codingDetailsFromBackend.length; i++) {
         codingDetails[codingDetailsFromBackend[i]["platform"]] = [
