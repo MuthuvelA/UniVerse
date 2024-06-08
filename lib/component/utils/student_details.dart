@@ -8,7 +8,7 @@ class StudentDetails {
   static List<dynamic> leetcodeLeaderboard = [];
   static List<dynamic> codechefLeaderboard = [];
   static List<dynamic> codeforcesLeaderboard = [];
-
+  static List<String> nameOfAllStudent = [];
   static List<String> getPersonalDetails() {
     personalMap.forEach((key, value) {
       if (key != "__v" && key != "_id" && key != "leetcode" && key != "codechef" && key != "currentYear" && key != "codeforces" && key != "parentName" && key != "invalidUserName") {
@@ -30,5 +30,13 @@ class StudentDetails {
     codingDetails.add(personalMap["codechef"]);
     codingDetails.add(personalMap["codeforces"]);
     return codingDetails;
+  }
+
+  static List<String> getNameOfAllStudent() {
+    personalMap.forEach((key,value) {
+      nameOfAllStudent.add(value);
+    });
+    print(nameOfAllStudent);
+    return nameOfAllStudent;
   }
 }

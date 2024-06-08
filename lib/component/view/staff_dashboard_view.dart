@@ -1,5 +1,7 @@
 
 import 'package:flutter/material.dart';
+import 'package:universe/component/utils/staff_details.dart';
+import 'package:universe/component/utils/student_details.dart';
 import 'package:universe/component/view/create_post_view.dart';
 import 'package:universe/component/view/generate_excel_view.dart';
 import 'package:universe/component/view/login_view.dart';
@@ -15,25 +17,16 @@ class StaffDashboardView extends StatefulWidget {
 
 class _StaffDashboardViewState extends State<StaffDashboardView> {
   //ExcelDownload excelDownload = ExcelDownload();
+  List<String> studentNames = StaffDetails().getNameOfAllStudent();
   @override
   Widget build(BuildContext context) {
-    List<String> studentNames = [
-      'Alice', 'Bob', 'Charlie', 'David', 'Eva', 'Frank', 'Grace', 'Henry',
-      'Isabel', 'Jack', 'Katie', 'Liam', 'Mia', 'Nathan', 'Olivia', 'Patrick',
-      'Quinn', 'Rachel', 'Samuel', 'Tina', 'Ursula', 'Victor', 'Wendy', 'Xander',
-      'Yvonne', 'Zack', 'Anna', 'Benjamin', 'Catherine', 'Daniel', 'Emily', 'Finn',
-      'Gabriella', 'Hannah', 'Isaac', 'Jessica', 'Kevin', 'Lily', 'Matthew', 'Nora',
-      'Oscar', 'Penelope', 'Quentin', 'Rebecca', 'Sophia', 'Thomas', 'Uma', 'Vincent',
-      'Willow', 'Xavier', 'Yasmine', 'Zara', 'Aaron', 'Bella', 'Caleb', 'Daisy',
-      'Ethan', 'Faith', 'Gavin', 'Holly', 'Ian', 'Jasmine', 'Kyle', 'Luna'
-    ];
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(title: Text(""),),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-          child: bodyPartOfDashboard(width,height,studentNames)),
+          child: bodyPartOfDashboard(width,height)),
       drawer: drawerForStaff()
     );
   }
@@ -90,7 +83,7 @@ class _StaffDashboardViewState extends State<StaffDashboardView> {
       ),
     );
   }
-  Widget bodyPartOfDashboard(double width, double height, List<String> studentNames){
+  Widget bodyPartOfDashboard(double width, double height){
     return Padding(
       padding: const EdgeInsets.only(left: 20,right: 20),
       child: Column(
@@ -99,14 +92,14 @@ class _StaffDashboardViewState extends State<StaffDashboardView> {
           welcomeBackCard(width,height),
           const SizedBox(height: 50,),
           const Text("Quick Recap",style: TextStyle(fontFamily: "Raleway",fontSize: 17),),
-          quickRecap(width,height,studentNames),
+          quickRecap(width,height),
         ],
       ),
     );
   }
-  Widget quickRecap(double width,double height,List<String> studentNames){
+  Widget quickRecap(double width,double height){
     List<String> title = ["Handling Student","Placed","Not Placed","As Intern"];
-    List<int> noStudent = [64,30,10,24];
+    List<int> noStudent = [StaffDetails.allAboutStudent.length,StaffDetails.placed.length,StaffDetails.nonPlaced.length,StaffDetails.intern.length];
     return GridView.count(
         crossAxisCount: 2,
       crossAxisSpacing: 10.0,
@@ -115,7 +108,17 @@ class _StaffDashboardViewState extends State<StaffDashboardView> {
       children: List.generate(4, (index) {
         return GestureDetector(
           onTap: () {
-            Navigator.push(context, (MaterialPageRoute(builder: (context) => StudentDetailsView(studentDetails: studentNames))));
+            if (title[index] == "Placed") {
+              Navigator.push(context, (MaterialPageRoute(builder: (context) => StudentDetailsView(studentDetails: StaffDetails.placed))));
+            }
+            else if (title[index] == "As Intern") {
+              Navigator.push(context, (MaterialPageRoute(builder: (context) => StudentDetailsView(studentDetails: StaffDetails.intern))));
+            }
+            else if (title[index] == "Not Placed") {
+              Navigator.push(context, (MaterialPageRoute(builder: (context) => StudentDetailsView(studentDetails: StaffDetails.nonPlaced))));
+            }
+            else
+            Navigator.push(context, (MaterialPageRoute(builder: (context) => StudentDetailsView(studentDetails: StaffDetails.allAboutStudent))));
             // this will be changed ASAP
           },
           child: Container(

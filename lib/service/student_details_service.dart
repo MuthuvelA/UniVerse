@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:html';
 import 'package:http/http.dart' as http;
 import 'package:universe/component/utils/credentials.dart';
 import 'package:universe/component/utils/student_details.dart';

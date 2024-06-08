@@ -1,19 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:universe/component/utils/staff_details.dart';
 import 'package:universe/component/view/student_profile.dart';
 
 class StudentDetailsView extends StatefulWidget {
   StudentDetailsView({super.key,required this.studentDetails});
-  final List<String> studentDetails;
+  final List<dynamic> studentDetails;
 
   @override
   State<StudentDetailsView> createState() => _StudentDetailsViewState();
 }
 
 class _StudentDetailsViewState extends State<StudentDetailsView> {
+  late int len = widget.studentDetails.length;
   @override
   Widget build(BuildContext context) {
-    int len = widget.studentDetails.length;
     return Scaffold(
       appBar: AppBar(
         title: Text("Student Details",style: TextStyle(fontFamily: "Raleway",fontSize: 17,color: Colors.black),),
@@ -35,6 +36,7 @@ class _StudentDetailsViewState extends State<StudentDetailsView> {
             const Padding(padding: EdgeInsets.only(top: 20)),
             GestureDetector(
               onTap: () {
+                StaffDetails.setProfile(widget.studentDetails[index]);
                 Navigator.push(context, (MaterialPageRoute(builder: (context) => const UserProfile())));
               },
               child: Container(
@@ -54,7 +56,7 @@ class _StudentDetailsViewState extends State<StudentDetailsView> {
                         children: [
                           Icon(Icons.person_2_outlined),
                           Padding(padding: EdgeInsets.only(left: 5)),
-                          Text("${widget.studentDetails[index]}",style: TextStyle(color: Colors.white,fontFamily: "Raleway-SemiBold",fontSize: 17),),
+                          Text("${widget.studentDetails[index]["name"]}",style: TextStyle(color: Colors.white,fontFamily: "Raleway-SemiBold",fontSize: 17),),
                         ],
                       ),
                       Padding(padding: EdgeInsets.only(bottom: 20)),

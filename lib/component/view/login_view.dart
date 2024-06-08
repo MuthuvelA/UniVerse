@@ -150,10 +150,15 @@ class _LoginViewState extends State<LoginView> {
                                   }
                                 }
                                 if (userCredentials.get_user_type() == 'Teacher') {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => const StaffDashboardView()),
-                                  );
+                                  bool decider = await staffLogin();
+                                  if (decider){
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const StaffDashboardView()),
+                                    );
+                                  }
                                 }
                                 else {
                                   showDialog("Wrong username and password");

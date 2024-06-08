@@ -1,4 +1,3 @@
-// ignore: avoid_web_libraries_in_flutter
 import 'dart:html';
 import 'dart:typed_data';
 
@@ -11,4 +10,4 @@ Future<void> saveExcel(String filename, Uint8List byteList) async {
 
   // Revoke the object URL to free up resources
   Url.revokeObjectUrl(url);
-} 
+}
